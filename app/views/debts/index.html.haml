@@ -1,0 +1,39 @@
+- provide(:title, t('debts_views.index_title'))
+.row
+  %h1 
+    = t('debts_views.index_sub_title')
+.row
+  %aside.span6
+    %section
+      %h3
+        = t('debts_views.dowload_all_debts')
+      %a{:href => "#{url_for debts_path(format: 'xlsx')}", :class => "btn btn-info disabled"}
+        = t('debts_views.download_excel')
+      %a{:href => "#{url_for debts_path(format: 'xls')}", :class => "btn btn-info"}
+        = t('debts_views.download_xls')
+      %a{:href => "#{url_for debts_path(format: 'csv')}", :class => "btn btn-info"}
+        = t('debts_views.download_csv')
+.row
+  %aside.span6
+    %section
+      %h3
+        = t('debts_views.debts_listing')
+      /Use a table here 
+      %table{:class => "table table-bordered table-striped table-hover table-condensed"}
+        %th{:class => "table-header" } 
+          = t('debts_views.debt_id')
+        %th
+          = t('debts_views.debt_quantity')
+        %th
+          = t('debts_views.debt_date')
+        %th
+          = t('debts_views.debtor_name')  
+        -@debts_all.each do |debt_item|
+          = render partial: 'list_all_debts', :locals => { :debt => debt_item }
+        = will_paginate(@debts_all)
+        /
+.row
+  %aside.span6
+    %section
+      %a{href: "/import", class: "btn btn-default alert-info"}
+        = t('debts_views.import_csv_btn')

@@ -1,0 +1,31 @@
+- provide(:title, t('debts_views.show_title'))
+%h1 
+  = t('debts_views.show_sub_title')
+.row
+  %aside.col-md-6
+    %section
+      %h5
+        -if @debtor
+          %ol.microposts
+            = render @debt #render partial: 'debts', :locals => { :collection => @collection }   
+          %em 
+            = t('debts_views.show_page_debtor')            
+          = link_to @debtor.name, @debtor
+        /end  
+
+  %aside.col-md-4
+    .btn-group-vertical.btn-group
+      /= button_to t('debts_views.generate_first_letter'), email_path, :class => "btn btn-primary", :method => :get, params: {id: @debt.id, mailer: :first} 
+      /= button_to t('debts_views.generate_second_letter'), email_path, :class => "btn btn-primary", :method => :get, params: {id: @debt.id, mailer: :second}
+      / %span{:class => 'glyphicon glyphicon-envelope'}
+      /= button_to t('debts_views.generate_third_letter'), email_path, :class => "btn btn-primary", :method => :get, params: {id: @debt.id, mailer: :third}
+      /= link_to "Vista preliminar de todos los Emails", rails_email_preview.rep_emails_url(email_locale: 'es', debt_id: @debt.id, current_user: @user)
+.row
+  -if @debt.respond_to?(:mail_logs) && !@debt.mail_logs.blank?
+    %table.table.table-stripped
+      %thead
+        %th
+          = t('debts_views.email_sent_on')
+        %th
+          = t('debts_views.email_sent')
+      = "render @debt.mail_logs"

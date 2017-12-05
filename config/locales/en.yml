@@ -1,0 +1,92 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  hello: "Hello world"
+  title: "Rukh 5"
+  help_page:
+    title: "How to use Rukh"
+    note: "Note:"
+    looking_debtor: To look for a debtor use the top menu.
+    selecting_debtor: To see the invoices of the debtor please select the debtor. 
+    need_to_be_logged_in: Rukh requires the user to sign up and be logged in. 
+    chrome_warning: "Note: Use Chrome-64 bit on Windows."
+  home_page:
+    title: Rukh 5 – Outstanding Accounts
+    welcome: Welcome to Rukh 5
+    blurb: Accounting for Outstanding Bills.
+    content: This is the home page.
+    login: Log in
+    log_out: Log Out
+  dev_page:
+    title: Developer
+    link_for_using: static_pages/using.en.md
+    about: About
+  footer:
+    help: Help
+    new_user: New User
+    current_user: "current user: "
+    no_user: none 
+  import_page:
+    title: 'Import CSV'
+    no_file: 'No file selected.'
+    not_csv: File is not a CSV.
+    imported: "Records Imported"
+    import: Import
+    instructions: A CSV file maybe used for importing records.
+    blurb: >-
+      La primera fila deben ser los nombre de la columnas de la base de datos.
+      ([Exporte](/debts)  a un CSV para ver cuales son.)
+    records_imported: "Records imported in:"
+    segundos: seconds
+  header:
+    user: User
+    update_info: Update Information
+    login: Log in
+    log_out: Log Out
+  validation_errors:
+    must_be_a_date: 'Must be a date.'
+    must_be_a_num: 'Must be a number.'
+    must_be_a_infraction_num: 'Must be an infraction or permit number (or be blank).'
+    must_be_bank_route_num: 'Must be a nine (9) digit number or be blank.' 
+  flash:
+    new_record_created: 'New Debtor Record created.'
+    warning_on_record_creation: 'There was an error. Debtor Record not created.'
+    error_on_record_creation: 'Error: There was a problem with the data submitted:'
+    debtor_record_erased: 'Debtor Record erased.'
+    debtor_info_updated: 'Debtor information updated.'
+    debtor_search_failed: 'Search term of unknown type (find me in debtor model).'
+  debtors_views:
+    debtors_list: "Debtor's List"
+    search_btn: "Search"
+    no_results: "There are no results for:"
+    resutls_for: "Results for:"
+  

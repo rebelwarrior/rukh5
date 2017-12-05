@@ -1,0 +1,25 @@
+- provide(:title, t('help_page.title') )
+/ = image_tag("deudores_instructions.png")
+
+
+%h1 
+  = t('help_page.title') 
+  
+%p 
+  %strong
+    = t('help_page.note') 
+  = t('help_page.need_to_be_logged_in')
+  
+%p
+  = t('help_page.looking_debtor')
+%p
+  = t('help_page.selecting_debtor')
+
+%br
+%hr
+/ = image_tag("listadodedeudores.png")
+%hr
+/ = image_tag("detallesdelafactura.png")
+
+%p
+  = t('help_page.chrome_warning')

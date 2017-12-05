@@ -1,0 +1,6 @@
+- provide(:title, t('dev_page.about'))
+- require 'kramdown/converter/html'
+= ## Changes the links to work inside the app (img and href) with gsub
+= Kramdown::Document.new(File.read(Rails.root.to_s + "/README.md")).to_html.gsub("app/assets/images/179px-Edward_Julius_Detmold49.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Edward_Julius_Detmold49.jpg/179px-Edward_Julius_Detmold49.jpg").gsub("app/views/static_pages/_using.en.md", "/dev").html_safe
+
+

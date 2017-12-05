@@ -1,0 +1,34 @@
+- provide(:title, t('debtors_views.edit_title'))
+%h1.col-md-offset-2 
+  = t('debtors_views.edit_title')
+.row
+  -if @debtor.errors.any?
+    %p.col-md-8.col-md-offset-2
+      %strong
+        = t('debtors_views.problems_with')
+    - @debtor.errors.full_messages.each do |msg|
+      %li{:class => "alert alert-danger col-md-8 col-md-offset-2"}
+        = msg
+  /
+  %div{:class => "col-md-8 col-md-offset-2"}
+    =form_for(@debtor, :method => 'patch') do |f|
+      -# Is this partial below duplicating errors?
+      =# render partial: 'layouts/error_messages', :locals => { :object => f.object }
+      =f.label :name, t('debtor_model.name')
+      =f.text_field :name, class: 'form-control'
+      =f.label :email, t('debtor_model.email')
+      =f.email_field :email, class: 'form-control'
+      =f.label :tel, t('debtor_model.tel')
+      =f.telephone_field :tel, class: 'form-control', placeholder: 'ex. 787-555-1234'
+      =f.label :ext, t('debtor_model.ext')
+      =f.telephone_field :ext
+      =f.label :address, t('debtor_model.address')
+      =f.text_field :address, class: 'form-control'
+      =f.label :location, t('debtor_model.location')
+      =f.text_field :location, class: 'form-control'
+      =f.label :employer_id_number, t('debtor_model.ein')
+      =f.text_field :employer_id_number, class: 'form-control', placeholder: 'ex. 12-1234567'
+      =f.label :ss_hex_digest, t('debtor_model.ss')
+      =f.password_field :ss_hex_digest, class: 'form-control', placeholder: 'ex. 123-12-1234'
+      .btn-group
+        =f.submit t('debtors_views.update_record'), class: "btn btn-large btn-primary"

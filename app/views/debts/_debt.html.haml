@@ -1,0 +1,4 @@
+%li.grey
+  %strong
+    =link_to ("<i class='fa fa-folder-open'></i> ".html_safe + "#{number_to_currency debt.pending_balance, :unit => '$'}"), debt_path(debt.id)
+

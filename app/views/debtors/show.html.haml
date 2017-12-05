@@ -1,0 +1,68 @@
+- provide(:title, t('debtors_views.show_title'))
+%h1 
+  = t('debtors_views.show_sub_title')
+.row
+  %aside.col-md-6
+    %section
+      %h1
+        = @debtor.name
+        %br
+    %section
+      .table-responsive
+        %table.table-bordered.table-striped
+          %thead
+            %tr
+              %td.grey
+                = "#{t('debtor_model.email')}:"
+              %td.grey.span4
+                = @debtor.email
+            %tr
+              %td
+                = "#{t('debtor_model.tel')}:"
+              %td
+                = "#{display_tel @debtor.tel} ext: #{@debtor.ext}"
+            %tr
+              %td
+                = @debtor.employer_id_number.blank? ? "SS -xxxx": "EIN"
+              %td
+                = # @debtor.employer_id_number.blank? ? @debtor.ss_last_four : @debtor.employer_id_number
+            %tr
+              %td.grey
+                = t('contact_person_model.name')
+              %td.grey
+                =# @debtor.contact_person
+            %tr
+              %td
+                = t('contact_person_model.email')
+              %td
+                =# @debtor.contact_person_email             
+  %aside.col-md-4
+    %h1
+    %section
+      .table-responsive
+        %table.table-bordered
+          %thead
+            %tr
+              %th.col-md-1.grey
+                = t('debtor_model.address')
+              %td.col-md-1.grey
+                = @debtor.address
+          %tbody  
+            %tr
+              %th.col-md-1
+                = t('debtor_model.location')
+              %td.col-md-1
+                = @debtor.location
+      %p
+        = link_to "<i class='fa fa-pencil'></i> #{t('debtors_views.edit_record')}".html_safe, edit_debtor_path  
+        
+%p
+  -#DONE added params[:id] to request
+  .btn-group
+    = button_to t('debtors_views.add_invoice'), new_debt_path, :class => "btn btn-large btn-primary", :method => 'get', params: {debtor_id: @debtor.id}        
+%div
+  %h5
+    %strong
+      = t('debtors_views.invoice') if @debtor.respond_to?(:debts) && !@debtor.debts.blank?
+  .col-md-8
+    = #render @debtor.debts

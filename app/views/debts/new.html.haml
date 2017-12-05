@@ -1,0 +1,53 @@
+- # TODO finish localizing and refactoring
+- provide(:title, t('debts_views.new_title'))
+%h1.col-md-offset-2 
+  = t('debts_views.new_sub_title')
+.row
+  -if @debt.errors.any?
+    %p.col-md-8.col-md-offset-2
+      %strong
+        = t('flash.problems_with')
+    - @debt.errors.full_messages.each do |msg|
+      %li{:class => 'alert alert-danger col-md-8 col-md-offset-2'}
+        = msg
+  /
+  %h3.col-md-8.col-md-offset-2
+    %strong
+      = t('debts_views.add_new_debt_to')
+    %p
+    - if @debtor 
+      %em.grey
+        !=" &bull;"
+        = @debtor.name
+      %em
+        = @debtor.tel
+        = "  |  "
+        = #@debtor.contact_person
+        %br
+        = "EIN: #{@debtor.employer_id_number}"
+        %br
+        = 'Ultimos 4 de SS: #{@debtor.ss_last_four}'
+    / 
+  %br
+  %div{:class => "col-md-8 col-md-offset-2"}
+    - if @debtor.blank?
+      -#Searchform
+    -else     
+      =form_for(@debt, url: {params: {debtor_id: @debtor.id}, controller: :debts, action: :create} ) do |f|
+        -#render partial: 'layouts/error_messages', :locals => { :object => f.object }
+        =f.label :infraction_number, t('debts_views.permit_number')
+        =f.text_field :infraction_number, class: 'form-control', placeholder: 'ex. PG-GE-71-12-10-4 o M-12-12-050-RC'
+        =f.label :incurred_debt_date, t('debts_views.original_debt_date')
+        =f.date_field :incurred_debt_date, class: 'form-control datepicker date_field', placeholder: '1999-01-31'
+        =f.label :pending_balance, t('debts_views.amount_owed')
+        .input-group
+          %span.input-group-addon
+            ='$'
+          =f.number_field :pending_balance, class: 'form-control'
+          %span.input-group-addon
+            = '.00'   
+        =f.label :fimas_id, t('debts_views.fimas_num')
+        =f.number_field :fimas_id, class: 'form-control'
+        .btn-group
+          =f.submit t('debts_views.add_new_debt_btn'), class: "btn btn-large btn-primary"
+    /end  

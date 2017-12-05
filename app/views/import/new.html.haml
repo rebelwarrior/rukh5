@@ -1,0 +1,16 @@
+- provide(:title, @import_title)
+%h1 
+  = t('import_page.title')
+%h2
+  = t('import_page.instructions')
+%p
+  = t('import_page.blurb')
+.container-fluid
+  .col-md-8
+    %div
+      = form_tag import_path, multipart: true do
+        = file_field_tag :file, class: 'input-group'
+        %p
+          .col-xs-6{style: 'margin-top: 15px'}
+            = submit_tag t('import_page.import'), class: 'btn btn-secondary'
+%hr    

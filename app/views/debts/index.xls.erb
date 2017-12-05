@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="<%= I18n.t('debts_views.index_export') %>">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">infraction_number</Data></Cell>
+        <Cell><Data ss:Type="String">pending_balance</Data></Cell>
+        <Cell><Data ss:Type="String">incurred_debt_date</Data></Cell>
+        <Cell><Data ss:Type="String">original_balance</Data></Cell>
+        <Cell><Data ss:Type="String">debtor_id</Data></Cell>
+        <Cell><Data ss:Type="String">debtor_name</Data></Cell>
+        <Cell><Data ss:Type="String">in_payment_plan</Data></Cell>
+        <Cell><Data ss:Type="String">fimas_id</Data></Cell>
+        <Cell><Data ss:Type="String">created_at</Data></Cell>
+        <Cell><Data ss:Type="String">updated_at</Data></Cell>
+      </Row>
+    <% @debts_all.each do |factura| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= factura.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= factura.infraction_number %></Data></Cell>
+        <Cell><Data ss:Type="Currency"><%= factura.pending_balance %></Data></Cell>
+        <Cell><Data ss:Type="Date"><%= factura.incurred_debt_date %></Data></Cell>
+        <Cell><Data ss:Type="Currency"><%= factura.original_balance  %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= factura.debtor_id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= factura.find_debtor_attr(factura.debtor_id, [:name]) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= factura.in_payment_plan %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= factura.fimas_id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= factura.created_at %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= factura.updated_at %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

@@ -1,0 +1,25 @@
+- #TODO: finish localizing and refactoring 
+- provide(:title, t('debts_views.edit_title'))
+%h1.col-md-offset-2 
+  = t('debts_views.edit_sub_title')
+.row
+  -if @debt.errors.any?
+    %p.col-md-8.col-md-offset-2
+      %strong
+        = t('flash.problems_with')
+    - @debt.errors.full_messages.each do |msg|
+      %li{:class => 'alert alert-danger col-md-8 col-md-offset-2'}
+        = msg
+  /
+  %div{:class => "col-md-8 col-md-offset-2"}
+    =#form_for(@debt, url: {params: {debtor_id: @debtor.id, id: @debt.id}, controller: :debts, action: :create} ) do |f|
+    =form_for(@debt, :method => 'patch') do |f|
+      = render partial: 'layouts/error_messages', :locals => { :object => f.object }
+      =f.label :permit_infraction_number, "Número de Permisno o Multa"
+      =f.text_field :permit_infraction_number, class: 'form-control'
+      =f.label :amount_owed_pending_balance, "Cantidad debida"
+      =f.number_field :amount_owed_pending_balance, class: 'form-control'  
+      =#hidden_field(:debtor_id,@debtor.id)
+      =#check_box_tag "en plan de pago?", "0", @debt.payment_plan?
+      .btn-group
+        =f.submit "Editar Factura", class: "btn btn-large btn-primary"

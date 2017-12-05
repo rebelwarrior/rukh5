@@ -1,0 +1,12 @@
+%footer.footer
+  %nav.lower-nav
+    %ul
+      %li
+        -# "grupo: #{ current_user.nil? ? 'ninguno' : '' }"
+      %li
+        =# "usuario actual: #{ current_user.nil? ? 'ninguno' : current_user.email }"
+      %li
+        = link_to "<i class='fa fa-question-circle'></i> #{t('footer.help')}".html_safe, help_path
+      %li
+        =# link_to "Usuario Nuevo", new_user_registration_path
+      

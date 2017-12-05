@@ -1,0 +1,134 @@
+es:
+  hello: "Hola Mundo!"
+  title: "Rukh 5"
+  help_page:
+    title: Como Usar Rukh
+    note: "Nota:"
+    looking_debtor: Para buscar a un deudor use el menú de arriba.
+    selecting_debtor: Para ver las facturas de deudor selecionelo.
+    need_to_be_logged_in: Rukh requiere que el usuario este inscrito y logged in. 
+    chrome_warning: "Nota: En Windows usar el browser Chrome (64-bit)." 
+  home_page:
+    title: Rukh 5 – Cuentas por Cobrar
+    welcome: Bienvenido a Rukh
+    blurb: Registro de Cuentas por Cobrar
+    content: Esta es la página home.
+    login: Log in
+    log_out: Log Out
+  dev_page:
+    title: Desarrolladores
+    link_for_using: static_pages/using.en.md
+    about: Información
+  footer:
+    help: Ayuda
+    new_user: Usuario Nuevo
+    current_user: "usuario actual: "
+    no_user: ninguno
+  import_page:
+    title: 'Importar CSV'
+    no_file: 'Ningún archivo selecionado.'
+    not_csv: 'No es un CSV'
+    imported: "Records Importados"
+    import: "Importar"
+    instructions: Un archivo CSV puede ser usado para importar records. 
+    blurb: >-
+      La primera fila deben ser los nombre de la columnas de la base de datos.
+      ([Exporte](/debts)  a un CSV para ver cuales son.)
+    records_imported: "Records Importados en:"
+    seconds: segundos
+  header:
+    user: Usuario
+    update_info: "Actualizar Información"
+    login: Log in
+    log_out: Log Out
+    debtors_list: "Lista de Deudores"
+    invoices: "Facturas"
+    new_debtor: "Deudor Nuevo"
+    serch_debtor: "Buscar Deudor"
+  validation_error:
+    must_be_date: 'Debe ser una fecha.'
+    must_be_num: 'Debe ser un número.'
+    must_be_infraction_num: 'Debe ser un número de multa o permiso (o estar en blanco).'
+    must_be_bank_route_num: 'Deber ser un número de nueve (9) digitos o estar en blanco.' 
+    invalid_email: 'Email invalido' 
+    must_be_valid_tel: "Debe de der un número de teléfono válido: 'xxx-xxx-xxx'"
+    must_be_valid_ein: "El Número de Seguro Social Patronal debe de ser válido: 'xx-xxxxxxx' o en blanco."
+    must_be_valid_ss: "El Número de Seguro Social Personal debe de ser válido: 'xxx-xx-xxxx' o en blanco."
+  flash:
+    new_record_created: 'Nuevo Record de Deudor Creado.'
+    warning_on_record_creation: 'Hubo un Error. Record de Deudor No Creado.'
+    error_on_record_creation: 'Error: Hay un problema con la data sometida.'
+    debtor_record_erased: 'Record del deudor borrado.'
+    debtor_info_updated: 'Informacion del deudor actualizada.'
+    debtor_search_failed: 'La buqueda del termino falló debido a ser de un tipo no conocido.'
+    new_debt_saved: 'Nueva Factura Creada'
+    debt_not_saved: 'Factura No Gravada'
+    debt_updated: 'Factura Actualizada'
+    debt_not_updated: 'Factura No Actualizada'
+    problems_with: "Problemas con:"
+  debtors_views:
+    debtors_list: "Lista de Deudores"
+    search_btn: "Buscar"
+    no_results: "No hay resultados para:"
+    results_for: "Resultados para:"
+    edit_title: "Editar Record del Deudor"
+    update_record: "Actualizar Record del Deudor"
+    problems_with: "Problemas con:"
+    create_record: "Crear Record de Deudor" 
+    create_record_btn: "Crear Record de Deudor Nuevo"
+    show_title: "Record del Deudor"
+    show_sub_title: "Record del Deudor:"
+    invoice: "Facturas:"
+    add_invoice: "Añadir Factura"
+    search: "Buscar"
+    edit_record: Editar Record del Deudor
+  debtor_model:
+    name: Nombre
+    email: Email
+    tel: Teléfono
+    ext: Extención
+    address: "Dirección Postal"
+    location: "Dirección Física"
+    contact_person: "Persona Contácto"
+    contact_person_email: "Email de la Persona Contácto"
+    ein: "Numbero de Seguro Social Patronal"
+    ss: "Numbero de Seguro Social Personal"
+    confirm_delete: "Confirme Borrar Record: ¿Seguro?"
+  contact_person_model:
+    name: Persona Contácto
+    email: Email de la Persona Contácto
+  debts_views:
+    index_title: "Facturas"
+    index_sub_title: "Facturas:"
+    dowload_all_debts: 'Archivos de todas las facturas:'
+    download_excel: Bajar datos en Excel
+    download_xls: Bajar datos en xls (LibreOffice)
+    download_csv: Bajar datos en CSV
+    debts_listing: "Listado:"
+    debt_id: ID
+    debt_quantity: Cantidad
+    debt_date: Fecha
+    debtor_name: Nombre
+    import_csv_btn: Importar CSV
+    date_format: '%d de %B de %Y'
+    index_export: Facturas
+    new_title: "Crear Factura Nueva"
+    new_sub_title: Crear Una Nueva Factura
+    add_new_debt_to: "Añadir una factura a: "
+    add_new_debt_btn: "Crear Factura"
+    permit_number: "Número de Permiso o Multa"
+    original_debt_date: "Fecha de la deuda originadora"
+    amount_owed: "Cantidad debida"
+    fimas_num: "Número de Fimas"
+    edit_title: "Editar Factura"
+    edit_sub_title: Editar Factura
+    show_title: "Record de la Factura"
+    show_sub_title: "Factura:"
+    show_page_debtor: "Deudor:"
+    generate_first_letter: "Generar Primer Aviso"
+    generate_second_letter: "Generar Segundo Aviso"
+    generate_third_letter: "Generar Tercer Aviso"
+    email_sent: "Email Enviado:"
+    email_sent_on: "Enviado el:"
+    
+    
