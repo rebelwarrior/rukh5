@@ -15,8 +15,9 @@ class Debt < ApplicationRecord
 
   ## Validations
   validates :debtor_id,          presence: true
-  validates :incurred_debt_date, presence: true, format: { with: VALID_DATE_REGEX,
-                                                           message: I18n.t('validation_error.must_be_date') }
+  validates :incurred_debt_date, presence: true,
+                                 format: { with: VALID_DATE_REGEX,
+                                           message: I18n.t('validation_error.must_be_date') }
   validates :pending_balance, format: { with: VALID_NUM_REGEX,
                                         message: I18n.t('validation_error.must_be_num') }
   # validates :bounced_check_number,               format: { with: /\A[[:digit:]]*\z/i,

@@ -1,6 +1,6 @@
 # Using
 
-Developing is done on Mac, below are instructions:
+Development is done on Mac, below are instructions:
 
 ### Requirements:
 

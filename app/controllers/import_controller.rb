@@ -1,4 +1,4 @@
-require 'import_logic'
+require 'import_logic2'
 
 class ImportController < ApplicationController
   before_action :authenticate_user!

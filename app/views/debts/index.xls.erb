@@ -5,6 +5,7 @@
   xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
   xmlns:html="http://www.w3.org/TR/REC-html40">
   <Worksheet ss:Name="<%= I18n.t('debts_views.index_export') %>">
+    <Style ss:ID="ce1"><NumberFormat ss:Format="Currency"/></Style>
     <Table>
       <Row>
         <Cell><Data ss:Type="String">ID</Data></Cell>
@@ -23,9 +24,9 @@
       <Row>
         <Cell><Data ss:Type="Number"><%= factura.id %></Data></Cell>
         <Cell><Data ss:Type="String"><%= factura.infraction_number %></Data></Cell>
-        <Cell><Data ss:Type="Currency"><%= factura.pending_balance %></Data></Cell>
+        <Cell ss:StyleID="ce1"><Data ss:Type="Number"><%= factura.pending_balance.to_i %></Data></Cell>
         <Cell><Data ss:Type="Date"><%= factura.incurred_debt_date %></Data></Cell>
-        <Cell><Data ss:Type="Currency"><%= factura.original_balance  %></Data></Cell>
+        <Cell ss:StyleID="ce1"><Data ss:Type="Number"><%= factura.original_balance.to_i  %></Data></Cell>
         <Cell><Data ss:Type="Number"><%= factura.debtor_id %></Data></Cell>
         <Cell><Data ss:Type="String"><%= factura.find_debtor_attr(factura.debtor_id, [:name]) %></Data></Cell>
         <Cell><Data ss:Type="String"><%= factura.in_payment_plan %></Data></Cell>

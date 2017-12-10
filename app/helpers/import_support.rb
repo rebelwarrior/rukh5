@@ -1,8 +1,8 @@
 module ImportSupport
   def self.import_key_array(model, extra = [])
-    model.attribute_names -  ["created_at", "updated_at"] + extra
+    model.attribute_names - %w[created_at updated_at] + extra
   end
-  
+
   def self.debt_headers_array
     ## Default keys for Debt
     %i[

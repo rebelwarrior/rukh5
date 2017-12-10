@@ -44,9 +44,9 @@ end
 
 class ProcessCSV
   include SuckerPunch::Job
-  
+
   # rubocop:disable Metrics/AbcSize
-  def perform(file, file_lines, char_set)
+  def perform(file, _file_lines, char_set)
     counter = []
     ActiveRecord::Base.connection_pool.with_connection do
       ActiveRecord::Base.transaction do
@@ -56,9 +56,9 @@ class ProcessCSV
                            file_encoding: char_set.to_s) do |file_chunk|
           file_chunk.each do |record_row|
             sanitized_row = ImportSupport.sanitize_hash(record_row)
-            StoreRecord.new.perform(sanitized_row, {})
+            StoreRecord.new.perform(sanitized_row)
             # appends in latest record to allow error to report where import failed
-            counter << sanitized_row 
+            counter << sanitized_row
             puts "\033[32m#Processed Record No. #{counter.size}.\033[0m\n"
             counter
           end
@@ -70,7 +70,7 @@ class ProcessCSV
 end
 
 class StoreRecord
-  # Refactor: This Stores record. 
+  # Refactor: This Stores record.
   include SuckerPunch::Job
 
   # def debtor_id_process(record, debtor_id, debt_id)
@@ -116,7 +116,7 @@ class StoreRecord
   end
 
   def store_one_record(record, inc_array, model, options = { create: true }, &block)
-    #TODO refactor
+    # TODO: refactor
     clean_record = ImportSupport.delete_all_keys_except(record, inc_array)
     # id = record.fetch(:id).to_i
     yield(clean_record) if block
@@ -135,14 +135,14 @@ class StoreRecord
     end
     # if succeeds...
   end
-  
-  def store_single_record(record, model, options = {create: true}, &block)
+
+  def store_single_record(record, model, options = { create: true }, &block)
     yield record if block
-    
+
     if options[:create]
       stored = model.create(record)
     elsif options[:update]
-      #TODO create method 
+      # TODO: create method
       fail "missing method update model"
     else
       fail ImportSupport::ImportError, 'No valid option given'
@@ -193,50 +193,59 @@ class StoreRecord
   #     debtor.id
   #   end
   # end
-  
+
   def search_by_ein(record, db_Debtor = Debtor)
     # Returns nil if debtor not found otherwise returns debtor
     return nil unless record[:employer_id_number]
     db_Debtor.find_by employer_id_number: record.fetch(:employer_id_number)
   end
-  
+
+  # def search_by_name(record, db_Debtor = Debtor)
+  #   # Returns nil if debtor not found otherwise returns debtor
+  #   name_string = record[:name] || record[:debtor_name]
+  #   return nil unless name_string
+  #   return nil if name_string.strip.casecmp('null').zero?
+  #   db_Debtor.find_by name: name_string
+  # end
+
   def search_by_name(record, db_Debtor = Debtor)
     # Returns nil if debtor not found otherwise returns debtor
-    return nil if name_string.strip.casecmp('null').zero?
-    db_Debtor.find_by name: name_string
+    return nil unless record[:debtor_name]
+    return nil unless record[:debtor_name].strip.casecmp('null').zero?
+    db_Debtor.find_by(name: record.fetch(:debtor_name))
   end
-  
+
   def search_by_id(record, db_Debtor = Debtor)
     # Returns nil if debtor not found otherwise returns debtor
     return nil unless record[:debtor_id]
     return nil unless record[:debtor_id].strip.casecmp('null').zero?
     db_Debtor.find_by(id: record.fetch(:debtor_id))
   end
-  
+
   def find_debtor_id(record, db_Debtor = Debtor)
     # Returns debtor_id or zero if not found.
     debtor = search_debtor_id(record, db_Debtor)
-    debtor ? debtor.id : 0 
+    debtor ? debtor.id : 0
   end
-  
+
   def search_debtor_id(record, db_Debtor = Debtor)
     # Returns debtor or nil
     search_by_id(record, db_Debtor) or
-    search_by_ein(record, db_Debtor) or 
-    search_by_name(record, db_Debtor) or 
-    nil
+      search_by_ein(record, db_Debtor) or
+      search_by_name(record, db_Debtor) or
+      nil
   end
-  
+
   def debtor_record(record)
-    debtor_record = ImportSupport.add_missing_keys(record, 
-                    ImportSupport.debtor_headers_array)
+    debtor_record = ImportSupport.add_missing_keys(record,
+                                                   ImportSupport.debtor_headers_array)
     ImportSupport.remove_nil_from_hash(debtor_record, '')
   end
 
   def perform(record)
     # debtor_id = debtor_in_db_already(record)
     debtor_id = find_debtor_id(record)
-    debt_id   = record.fetch(:id, 0).to_i 
+    debt_id   = record.fetch(:id, 0).to_i
     inc_array = ImportSupport.import_key_array(Debt, ["debtor_name"])
     clean_record = ImportSupport.delete_all_keys_except(record, inc_array)
 
@@ -246,12 +255,12 @@ class StoreRecord
       # debtor_id_process(record, debtor_id, debt_id)
     elsif debtor_id.zero? && debt_id.zero?
       # Create new debt and new debtor
-      create_new_debtor(clean_record) 
+      create_new_debtor(clean_record)
       create_new_debt(clean_record, debtor_id)
     elsif !debtor_id.zero? && !debt_id.zero?
       # Update existing debt for existing debtor.
       fail "no implemented yet"
-      
+
     elsif record[:debtor_id] && debtor_id.nil?
       fail "should not see this"
       ## DONE: merge hash to add missing keys
@@ -275,18 +284,18 @@ class StoreRecord
       fail ImportSupport::ImportError, "Can't understand import record: #{record}"
     end
   end
-  
+
   def create_new_debt(record, debtor_id)
     record[:debtor_id] = debtor_id
     # store_debt_record(record)
-    store_single_record(record, Debt, {create: true})
+    store_single_record(record, Debt, create: true)
   end
-  
-  def create_new_debtor(record, db_Debtor = Debtor) 
+
+  def create_new_debtor(record, _db_Debtor = Debtor)
     # Refactor
     fail "not implemented yet new debtor"
     # debtor = Debtor.create {name: record[:debtor_name]} #Contact name?
     # debtor.id
-    store_single_record({name: record[:debtor_name]}, Debtor, {create: true})
+    store_single_record({ name: record[:debtor_name] }, Debtor, create: true)
   end
 end

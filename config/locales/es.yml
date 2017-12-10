@@ -1,4 +1,27 @@
 es:
+  will_paginate:
+    previous_label: "&#8592; anterior"
+    next_label: "proxima &#8594;"
+    page_gap: "&hellip;"
+  date:
+    abbr_month_names:
+    -
+    - ene
+    - feb
+    - mar
+    - abr
+    - may
+    - jun
+    - jul
+    - ago
+    - sep
+    - oct
+    - nov
+    - dic
+    formats:
+      default: ! '%d de %b. de %Y'
+      long: ! '%A, %d de %b. de %Y'
+      short: ! '%d de %b.'
   hello: "Hola Mundo!"
   title: "Rukh 5"
   help_page:
@@ -24,6 +47,8 @@ es:
     new_user: Usuario Nuevo
     current_user: "usuario actual: "
     no_user: ninguno
+    new_user: "Usuario Nuevo"
+    about: Info
   import_page:
     title: 'Importar CSV'
     no_file: 'Ningún archivo selecionado.'
@@ -130,5 +155,12 @@ es:
     generate_third_letter: "Generar Tercer Aviso"
     email_sent: "Email Enviado:"
     email_sent_on: "Enviado el:"
+  errors:
+    not_authorized: "No Autorizado"
+  notifications_mailer:
+    first_notice:
+      subject: "Primera Notificación"
+    second_notice:
+      subject: "Segunda Notificación"
     
     

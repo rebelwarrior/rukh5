@@ -20,6 +20,7 @@ class DebtsController < ApplicationController
     @debtor = Debtor.find_by_id @debt.debtor_id
   end
 
+  # rubocop:disable Metrics/AbcSize
   def create
     assign_current_user
     @debtor = Debtor.find_by_id(params[:debtor_id])
