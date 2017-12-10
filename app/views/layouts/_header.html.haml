@@ -18,7 +18,7 @@
           %a{:href => '#', :class => 'dropdown-toggle nav-link', :'data-toggle' => 'dropdown' }
             = t('header.user')
             %b.caret
-          %ul.dropdown-menu
+          %ul.dropdown-menu.bg-dark
             %li.nav-item
               = link_to "#{@user.email if @user}", '#', class: 'nav-link'
             %li.nav-item.divider
