@@ -16,4 +16,4 @@
     %a{:href => new_user_session_path, :class => "btn btn-large btn-primary"}
       = t('home_page.login')
   -else
-    = link_to t('home_page.log_out'), destroy_user_session_path, method: "delete", :class => "btn btn-large btn-default"
+    = link_to t('home_page.log_out'), destroy_user_session_path, method: "delete", :class => "btn btn-secondary"

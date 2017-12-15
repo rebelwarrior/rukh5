@@ -12,15 +12,12 @@
           = link_to t('header.new_debtor'), new_debtor_path, class: 'nav-link'
         %li.nav-item 
           = link_to t('header.serch_debtor'), search_path, class: 'nav-link'
-        %li.nav-item 
-          = link_to t('header.log_out'), destroy_user_session_path, method: "delete", class: 'nav-link'
+        / %li.nav-item= link_to t('header.log_out'), destroy_user_session_path, method: "delete", class: 'nav-link'
         %li.nav-item.dropdown
           %a{:href => '#', :class => 'dropdown-toggle nav-link', :'data-toggle' => 'dropdown' }
             = t('header.user')
             %b.caret
           %ul.dropdown-menu.bg-dark
-            %li.nav-item
-              = link_to "#{@user.email if @user}", '#', class: 'nav-link'
             %li.nav-item.divider
             %li.nav-item
               = link_to t('header.update_info'), edit_user_registration_path(current_user), class: 'nav-link'

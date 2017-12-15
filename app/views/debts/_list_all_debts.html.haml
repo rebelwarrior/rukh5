@@ -6,4 +6,4 @@
   %td
     =I18n.l debt.incurred_debt_date, :format => I18n.t('debts_views.date_format')
   %td
-    =link_to debt.debtor.name, debtor_path(debt.debtor.id)
+    =link_to debt.debtor.name, debtor_path(debt.debtor.id) unless debt.debtor.nil?

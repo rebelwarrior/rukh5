@@ -12,17 +12,49 @@
 %h1 
   = t('debtors_views.debtors_list')
 -if params[:search].blank?
-  - #will_paginate
 
-  %ul.debtors
+  /Use a table here 
+  %table{:class => "table table-bordered table-hover table-condensed"}
+    %th{:class => "table-header" } 
+      = "ID"
+    %th
+      = "Debtor"
+    %th
+      = "TEL"
+    %th
+      =  "TEL EXT"
+    %th
+      = "EMAIL"
+    %th
+      = "EIN"
+    %th
+      = "OWED"
+    %td
+      = ""
     = render @debtors
-    /
 
   = will_paginate @debtors
 -elsif @debtors.empty?
   %h4="#{t('debtors_views.no_results')} #{params[:search]}" 
 -else
   %h4="#{t('debtors_views.results_for')} #{params[:search]}" 
-  %ul.debtors
+  /Use a table here 
+  %table{:class => "table table-bordered table-hover table-condensed"}
+    %th{:class => "table-header" } 
+      = "ID"
+    %th
+      = "Debtor"
+    %th
+      = "TEL"
+    %th
+      =  "TEL EXT"
+    %th
+      = "EMAIL"
+    %th
+      = "EIN"
+    %th
+      = "OWED"
+    %td
+      = ""
     = render @debtors
 /

@@ -1,26 +1,20 @@
-- # #TODO: Refactor & Icons
 - # TODO: Refactor Use table?
 -# (total = @color_code_proc.call(debtor.debts)) unless debtor.nil?
 - total = 1
-%li{:class => "#{"total.zero? ? 'green' : 'red' "} round-bottom-corners debtors"}
-  -# Create a collect method to show total amount owed or paid.{:class => "#{debtor.collections.any? ? 'red' : 'green'}"}
-  = "#{debtor.id}"
-  = " "
-  %strong
-    = link_to(("<i class='fa fa-folder-open'></i>".html_safe + debtor.name), debtor)
-  = " — "
-  = display_tel debtor.tel
-  = display_ext debtor.ext
-  = " | email: "
-  = debtor.email
-  = " | " unless debtor.employer_id_number.blank?
-  = link_to debtor.employer_id_number, debtor 
-  - if total.zero?
-    = " | #{number_to_currency total, :unit => "$"}"
-  - else
-    = " | "
-    %strong
-      = number_to_currency(total, :unit => '$')
-  - unless true or debtor.respond_to?(:debts) && !debtor.debts.blank?#current_user.admin? #or current_user.supervisor?
-    = " | "
-    = link_to "<i class='fa fa-trash'></i> delete".html_safe, debtor, method: :delete, data: {confirm: t('debtor_model.confirm_delete')}
+%tr{:class => "#{"total.zero? ? 'green' : 'red' "}"}
+  %td
+    = "#{debtor.id}"
+  %td
+    =link_to(("<i class='fa fa-folder-open'></i>".html_safe + debtor.name), debtor)
+  %td
+    = display_tel debtor.tel
+  %td
+    = display_ext debtor.ext
+  %td
+    = debtor.email
+  %td
+    = link_to debtor.employer_id_number, debtor 
+  %td
+    = number_to_currency(total, :unit => '$')
+  %td
+    = link_to "<i class='fa fa-trash'></i>".html_safe, debtor, method: :delete, data: {confirm: t('debtor_model.confirm_delete')}
