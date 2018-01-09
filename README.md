@@ -26,7 +26,7 @@ Rukh was originally 'RucPoc -- registro único de cuentas por cobrar' (literally
 Please see [__Using__](app/views/static_pages/_using.en.md).
 
 ### Code Organization
-This app was developed using **BDD** and **Hexagonal Rails** design, that is the buisness logic should be as much as possible in the `/lib` folder and talk to the controller or model through self-contained method calls. Search YouTube for ["GoRuCo 2012 Hexagonal Rails by Matt Wynne"](https://youtu.be/CGN4RFkhH2M) for more details on Hexagonal Rails.
+This app was developed using **BDD** and **Hexagonal Rails** design, that is the business logic should be as much as possible in the `/lib` folder and talk to the controller or model through self-contained method calls. Search YouTube for ["GoRuCo 2012 Hexagonal Rails by Matt Wynne"](https://youtu.be/CGN4RFkhH2M) for more details on Hexagonal Rails.
 The `/lib` folder isn't automatically reloaded. The `/logic` and the `helper` folders were used instead. 
 
 ## Testing

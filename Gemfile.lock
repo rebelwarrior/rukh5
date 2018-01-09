@@ -45,10 +45,10 @@ GEM
       tzinfo (~> 1.1)
     arel (8.0.0)
     ast (2.3.0)
-    autoprefixer-rails (7.2.1)
+    autoprefixer-rails (7.2.4)
       execjs
     bcrypt (3.1.11-java)
-    bootstrap (4.0.0.beta2.1)
+    bootstrap (4.0.0.beta3)
       autoprefixer-rails (>= 6.0.3)
       popper_js (>= 1.12.3, < 2)
       sass (>= 3.5.2)
@@ -86,14 +86,13 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5-java)
     crass (1.0.3)
-    devise (4.3.0)
+    devise (4.4.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
     diff-lcs (1.3)
-    docile (1.1.5)
     erubi (1.7.0)
     execjs (2.7.0)
     factory_bot (4.8.2)
@@ -120,7 +119,6 @@ GEM
       thor (>= 0.14, < 2.0)
     jruby-jars (9.1.15.0)
     jruby-rack (1.1.21)
-    json (2.1.0-java)
     kramdown (1.16.2)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -133,16 +131,16 @@ GEM
       mini_mime (>= 0.1.1)
     method_source (0.9.0)
     mini_mime (1.0.0)
-    minitest (5.10.3)
-    multi_json (1.12.2)
-    nio4r (2.1.0-java)
+    minitest (5.11.1)
+    multi_json (1.13.0)
+    nio4r (2.2.0-java)
     nokogiri (1.8.1-java)
     nuggets (1.5.0)
     orm_adapter (0.5.0)
-    parallel (1.12.0)
+    parallel (1.12.1)
     parser (2.4.0.2)
       ast (~> 2.3)
-    popper_js (1.12.5)
+    popper_js (1.12.9)
     powerpack (0.1.1)
     pry (0.11.3-java)
       coderay (~> 1.1.0)
@@ -184,17 +182,21 @@ GEM
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
-    rspec (3.7.0)
-      rspec-core (~> 3.7.0)
-      rspec-expectations (~> 3.7.0)
-      rspec-mocks (~> 3.7.0)
-    rspec-core (3.7.0)
+    rspec-core (3.7.1)
       rspec-support (~> 3.7.0)
     rspec-expectations (3.7.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
     rspec-mocks (3.7.0)
       diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.7.0)
+    rspec-rails (3.7.2)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 3.7.0)
+      rspec-expectations (~> 3.7.0)
+      rspec-mocks (~> 3.7.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.0)
     rubocop (0.49.1)
@@ -209,10 +211,10 @@ GEM
     ruby-progressbar (1.9.0)
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
-    ruumba (0.1.2)
+    ruumba (0.1.3)
       rubocop
     safe_yaml (1.0.4)
-    sass (3.5.3)
+    sass (3.5.5)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -223,11 +225,6 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    simplecov (0.15.1)
-      docile (~> 1.1.0)
-      json (>= 1.8, < 3)
-      simplecov-html (~> 0.10.0)
-    simplecov-html (0.10.2)
     smarter_csv (1.1.5)
     spoon (0.0.6)
       ffi
@@ -249,14 +246,14 @@ GEM
     tilt (2.0.8)
     timers (4.1.2)
       hitimes
-    turbolinks (5.0.1)
-      turbolinks-source (~> 5)
-    turbolinks-source (5.0.3)
+    turbolinks (5.1.0)
+      turbolinks-source (~> 5.1)
+    turbolinks-source (5.1.0)
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
     tzinfo-data (1.2017.3)
       tzinfo (>= 1.0.0)
-    uglifier (4.0.1)
+    uglifier (4.1.3)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.3.0)
     warbler (2.0.4)
@@ -277,7 +274,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-jdbcsqlite3-adapter
   bcrypt (~> 3.1.7)
-  bootstrap (~> 4.0.0.beta2.1)
+  bootstrap (~> 4.0.0.beta3)
   bootstrap-will_paginate
   celluloid (~> 0.17.3)
   cmess
@@ -286,6 +283,7 @@ DEPENDENCIES
   factory_bot
   font-awesome-sass
   haml
+  hamlit
   jbuilder (~> 2.5)
   jquery-rails
   jruby-jars (= 9.1.15.0)
@@ -295,12 +293,11 @@ DEPENDENCIES
   pry
   puma (~> 3.7)
   rails (~> 5.1.4)
-  rspec
+  rspec-rails
   rubocop (~> 0.49.1)
   rubocop-rspec
   ruumba
   sass-rails (~> 5.0)
-  simplecov
   smarter_csv
   sucker_punch
   therubyrhino

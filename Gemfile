@@ -37,12 +37,13 @@ gem 'listen', platforms: :jruby
 gem 'devise'
 
 # Using HAML
-gem 'haml'
+gem 'haml', platforms: :jruby
+gem 'hamlit', platforms: :ruby
 
 # Using Bootstrap
 gem 'jquery-rails'
 gem 'popper_js'
-gem 'bootstrap', '~> 4.0.0.beta2.1'
+gem 'bootstrap', '~> 4.0.0.beta3'
 
 # Pagination
 gem 'will_paginate' # , '~> 3.0.7'
@@ -65,14 +66,12 @@ gem 'sucker_punch', require: false
 
 group :development, :test do
   # RSpec
-  gem 'rspec'
+  gem 'rspec-rails'
   gem 'factory_bot'
   # RuboCop for stylechecker
   gem 'rubocop', '~> 0.49.1', require: false
   gem 'rubocop-rspec', require: false
   gem 'ruumba', require: false
-  # Code Coverage
-  gem 'simplecov', require: false
 end
 
 group :deploy do
