@@ -65,9 +65,11 @@ gem 'celluloid', '~> 0.17.3', require: false
 gem 'sucker_punch', require: false
 
 group :development, :test do
-  # RSpec
+  # RSpec (testing)
   gem 'rspec-rails'
   gem 'factory_bot'
+  # Capybara (feature testing)
+  gem 'capybara'
   # RuboCop for stylechecker
   gem 'rubocop', '~> 0.49.1', require: false
   gem 'rubocop-rspec', require: false
