@@ -51,3 +51,7 @@ config/database.yml
 
 # Ignore Code Coverage Report
 /coverage
+
+# Ignore Development Database
+db/development.sqlite3
+
