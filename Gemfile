@@ -79,7 +79,7 @@ end
 group :deploy do
   # For Warbler see: config/application.rb and config/environtments/production.rb
   gem 'warbler', require: false, platforms: :jruby
-  gem 'jruby-jars', '9.1.15.0', require: false, platforms: :jruby
+  gem 'jruby-jars', '9.1.16.0', require: false, platforms: :jruby
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
