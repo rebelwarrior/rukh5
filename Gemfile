@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+jruby_jars_version = '9.1.17.0'
+
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
@@ -79,7 +81,7 @@ end
 group :deploy do
   # For Warbler see: config/application.rb and config/environtments/production.rb
   gem 'warbler', require: false, platforms: :jruby
-  gem 'jruby-jars', '9.1.16.0', require: false, platforms: :jruby
+  gem 'jruby-jars', jruby_jars_version, require: false, platforms: :jruby
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
