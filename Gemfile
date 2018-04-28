@@ -66,6 +66,9 @@ gem 'cmess', require: false # , '~> 0.4.1'
 gem 'celluloid', '~> 0.17.3', require: false
 gem 'sucker_punch', require: false
 
+# For Roles and Authorization
+gem 'action_policy'
+
 group :development, :test do
   # RSpec (testing)
   gem 'rspec-rails'
