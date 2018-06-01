@@ -184,3 +184,5 @@ namespace :tomcat do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
+# rubocop:enable Style/GuardClause

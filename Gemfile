@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-jruby_jars_version = '9.1.17.0'
+jruby_jars_version = '9.2.0.0'
+
+TODO = "Switch will paginate w/ kaminari or pagy"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
