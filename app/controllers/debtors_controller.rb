@@ -1,5 +1,8 @@
 class DebtorsController < ApplicationController
   before_action :authenticate_user!
+  
+  include Pagy::Backend
+  
 
   ## Resource Actions ##
   def new
@@ -68,12 +71,12 @@ class DebtorsController < ApplicationController
   def index
     assign_current_user
 
-    @debtors =
-      if params[:search].blank?
-        Debtor.paginate(page: params[:page], per_page: 10)
-      else
-        Debtor.search(params[:search])
-      end
+    if params[:search].blank?
+      # Debtor.paginate(page: params[:page], per_page: 10)
+      @pagy, @debtors = pagy(Debtor.all, items: 10)
+    else
+      @debtors = Debtor.search(params[:search])
+    end
 
     # @color_code_proc =
     #   lambda do |debtor_debts|

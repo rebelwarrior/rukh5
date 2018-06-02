@@ -1,4 +1,6 @@
 module DebtorsHelper
+  include Pagy::Frontend
+  
   def display_tel_old(string)
     # Left her for documentation
     # first attempt refactored below.

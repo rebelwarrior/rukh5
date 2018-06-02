@@ -1,0 +1,21 @@
+# Standard pagy dictionary
+
+es:
+  pagy:
+    nav:
+      prev: "&lsaquo;&nbsp; anterior"
+      next: "proximo &nbsp;&rsaquo;"
+      gap: "&hellip;"
+    info:
+      single_page:
+        zero: "Ningún %{item_name} encontrado."
+        one: "Mostrando <b>1</b> %{item_name}"
+        other: "Mostrando <b>todos %{count}</b> %{item_name}"
+      multiple_pages: "Mostrando %{item_name} <b>%{from}-%{to}</b> de <b>%{count}</b> en total"
+      item_name:
+        zero: "ítems"
+        one: "ítem"
+        other: "ítems"
+    compact:
+      page: Página
+      of: de

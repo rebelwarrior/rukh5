@@ -50,8 +50,9 @@ gem 'popper_js'
 gem 'bootstrap', '~> 4.0.0.beta3'
 
 # Pagination
-gem 'will_paginate' # , '~> 3.0.7'
-gem 'bootstrap-will_paginate'
+# gem 'will_paginate' # , '~> 3.0.7'
+# gem 'bootstrap-will_paginate'
+gem 'pagy'
 
 # Markdown
 gem 'kramdown'
@@ -80,7 +81,6 @@ group :development, :test do
   # RuboCop for stylechecker
   gem 'rubocop', '~> 0.49.1', require: false
   gem 'rubocop-rspec', require: false
-  gem 'ruumba', require: false
 end
 
 group :deploy do
