@@ -3,8 +3,8 @@
 es:
   pagy:
     nav:
-      prev: "&lsaquo;&nbsp; anterior"
-      next: "proximo &nbsp;&rsaquo;"
+      prev: "&lsaquo;&nbsp;anterior"
+      next: "próximo&nbsp;&rsaquo;"
       gap: "&hellip;"
     info:
       single_page:

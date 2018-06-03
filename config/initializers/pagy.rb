@@ -19,7 +19,7 @@ require 'pagy/extras/bootstrap'
 
 # I18n: Uses the `I18n` gem instead of the pagy implementation
 # See https://ddnexus.github.io/pagy/extras/i18n
-# require 'pagy/extras/i18n' ## This has an error 
+require 'pagy/extras/i18n' 
 
 # Responsive: On resize, the number of page links will adapt in real-time to the available window or container width
 # See https://ddnexus.github.io/pagy/extras/responsive
@@ -54,4 +54,4 @@ require 'pagy/extras/responsive'
 
 # Rails: extras assets path required by compact or responsive extras
 # See https://ddnexus.github.io/pagy/extras/compact and https://ddnexus.github.io/pagy/extras/responsive
-# Rails.application.config.assets.paths << Pagy.root.join('pagy', 'extras', 'javascripts')
+Rails.application.config.assets.paths << Pagy.root.join('pagy', 'extras', 'javascripts')

@@ -48,11 +48,12 @@ gem 'hamlit', platforms: :ruby
 gem 'jquery-rails'
 gem 'popper_js'
 gem 'bootstrap', '~> 4.0.0.beta3'
+# gem 'bootstrap', '~> 4.1.1'
 
 # Pagination
 # gem 'will_paginate' # , '~> 3.0.7'
 # gem 'bootstrap-will_paginate'
-gem 'pagy'
+gem 'pagy', '>= 0.8.5'
 
 # Markdown
 gem 'kramdown'
