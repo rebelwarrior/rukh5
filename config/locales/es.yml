@@ -3,6 +3,14 @@ es:
     previous_label: "&#8592; anterior"
     next_label: "proxima &#8594;"
     page_gap: "&hellip;"
+  table_headers:
+    ein: "EIN"
+    id: "ID"
+    debtor: "DEUDOR"
+    tel: "TEL"
+    ext: "TEL EXT"
+    email: "EMAIL"
+    owed: "MONTO"
   date:
     abbr_month_names:
     -

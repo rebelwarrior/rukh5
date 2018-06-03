@@ -2,6 +2,7 @@ require 'hex_string'
 
 class Debtor < ApplicationRecord
   # TODO: remove calls to Model#encrypt for a more universal method.
+  has_many :debts
 
   ## Hooks
   before_save { self.email = email.downcase if email }

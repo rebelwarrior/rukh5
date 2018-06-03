@@ -77,13 +77,6 @@ class DebtorsController < ApplicationController
     else
       @debtors = Debtor.search(params[:search])
     end
-
-    # @color_code_proc =
-    #   lambda do |debtor_debts|
-    #     debtor_debts
-    #       .collect { |debt| debt.paid_in_full ? 0 : debt.amount_owed_pending_balance }
-    #       .reduce(0) { |total, amount| amount + total }
-    #   end
   end
 
   ## Additional Methods ##

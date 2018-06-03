@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171123191337) do
+ActiveRecord::Schema.define(version: 20180603230258) do
 
   create_table "contact_people", force: :cascade do |t|
     t.string "name"
@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 20171123191337) do
   end
 
   create_table "debts", force: :cascade do |t|
-    t.decimal "pending_balance"
-    t.decimal "original_balance"
+    t.decimal "pending_balance", precision: 8, scale: 2
+    t.decimal "original_balance", precision: 8, scale: 2
     t.date "incurred_debt_date"
     t.boolean "in_payment_plan"
     t.integer "debtor_id"

@@ -1,7 +1,5 @@
-- # TODO: Refactor Use table?
--# (total = @color_code_proc.call(debtor.debts)) unless debtor.nil?
-- total = 1
-%tr{:class => "#{"total.zero? ? 'green' : 'red' "}"}
+- total = debtor.nil? ? 0 : debtor.debts.sum(:pending_balance)
+%tr{:class => "#{total.zero? ? '' : 'red' }"}
   %td
     = "#{debtor.id}"
   %td
