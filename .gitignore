@@ -45,6 +45,8 @@ config/database.yml
 /public/assets/*.png
 /public/assets/*.jpg
 /public/assets/*.gz
+/public/assets/*.json
+/public/assets/font-awesome/*
 
 # Ignore sass-cache
 /.sass-cache
