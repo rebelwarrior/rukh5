@@ -48,7 +48,6 @@ gem 'hamlit', platforms: :ruby
 gem 'jquery-rails'
 gem 'popper_js'
 gem 'bootstrap', '~> 4.0.0.beta3'
-# gem 'bootstrap', '~> 4.1.1'
 
 # Pagination
 # gem 'will_paginate' # , '~> 3.0.7'
@@ -92,3 +91,6 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
+## Security Vulnerability on previous versions
+gem 'sprockets', '>= 3.7.2', '< 4.0.0' #'>= 4.0.0.beta8'

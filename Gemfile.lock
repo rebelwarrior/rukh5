@@ -256,7 +256,7 @@ GEM
     smarter_csv (1.2.3)
     spoon (0.0.6)
       ffi
-    sprockets (3.7.1)
+    sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     sprockets-rails (3.2.1)
@@ -333,6 +333,7 @@ DEPENDENCIES
   rubocop-rspec
   sass-rails (~> 5.0)
   smarter_csv
+  sprockets (>= 3.7.2, < 4.0.0)
   sucker_punch
   therubyrhino
   turbolinks (~> 5)
