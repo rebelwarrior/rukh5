@@ -3,7 +3,7 @@ Rukh 5
 
 ![Rukh](app/assets/images/179px-Edward_Julius_Detmold49.jpg)
 
-[![security](https://hakiri.io/github/rebelwarrior/rukh/master.svg)](https://hakiri.io/github/rebelwarrior/rukh5/master)
+[![security](https://hakiri.io/github/rebelwarrior/rukh5/master.svg)](https://hakiri.io/github/rebelwarrior/rukh5/master)
 
 ## About
 Originally developed for the Environmental Quality Board (_Junta de Calidad Ambiental_, JCA), this application maintains an accounting of out-standing debts specifically those resulting from bounced checks. Parallel accounting of these was required for these, to allow for the closing of the fiscal year. Previously all accounting for these out-standing debts was kept track on a Excel file on a single computer. 
