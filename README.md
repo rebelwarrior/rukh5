@@ -39,7 +39,7 @@ To run the rubocop linter run `rubocop -D`.
 ## License 
 The code is under the __GPL3__ license. 
 
-This application was created solely by David Acevedo (© David Acevedo 2015-2017).  
+This application was created solely by David Acevedo (© David Acevedo 2015-2018).  
 
 rukh image: [wikimedia commons](http://en.wikipedia.org/wiki/File:Edward_Julius_Detmold49.jpg): Charles Maurice Detmold (1883-1908)
 
