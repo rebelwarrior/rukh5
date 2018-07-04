@@ -58,6 +58,7 @@ es:
     new_user: "Usuario Nuevo"
     about: Info
   import_page:
+    select_file: 'Seleccionar Archivo'
     title: 'Importar CSV'
     no_file: 'Ningún archivo selecionado.'
     not_csv: 'No es un CSV'

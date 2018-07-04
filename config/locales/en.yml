@@ -56,6 +56,7 @@ en:
     current_user: "current user: "
     no_user: none 
   import_page:
+    select_file: 'Select File'
     title: 'Import CSV'
     no_file: 'No file selected.'
     not_csv: File is not a CSV.

@@ -1,4 +1,5 @@
 - provide(:title, @import_title)
+- # provide(:lang, @lang)
 %h1 
   = t('import_page.title')
 %h2
@@ -9,7 +10,10 @@
   .col-md-8
     %div
       = form_tag import_path, multipart: true do
-        = file_field_tag :file, class: 'input-group'
+        .custom-file
+          = file_field_tag :file, class: 'custom-file-input', lang: 'es', id: 'customFileLang'
+          %label.custom-file-label{for: 'customFileLang'}
+            = t('import_page.select_file')
         %p
           .col-xs-6{style: 'margin-top: 15px'}
             = submit_tag t('import_page.import'), class: 'btn btn-secondary'
