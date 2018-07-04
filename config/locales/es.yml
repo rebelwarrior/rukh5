@@ -67,7 +67,7 @@ es:
     instructions: Un archivo CSV puede ser usado para importar records. 
     blurb: >-
       La primera fila deben ser los nombre de la columnas de la base de datos.
-      ([Exporte](/debts)  a un CSV para ver cuales son.)
+      (Exporte a un CSV para ver cuales son.)
     records_imported: "Records Importados en:"
     seconds: segundos
   header:
