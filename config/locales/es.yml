@@ -58,8 +58,9 @@ es:
     new_user: "Usuario Nuevo"
     about: Info
   import_page:
-    select_file: 'Seleccionar Archivo'
     title: 'Importar CSV'
+    select_file: 'Seleccionar Archivo'
+    file_button: 'This Localization is in Application SCSS'
     no_file: 'Ningún archivo selecionado.'
     not_csv: 'No es un CSV'
     imported: "Records Importados"
