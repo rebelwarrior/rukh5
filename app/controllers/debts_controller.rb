@@ -1,5 +1,6 @@
 class DebtsController < ApplicationController
   before_action :authenticate_user!
+  ## Mailing Actions should be included here.
   
   include Pagy::Backend
 
