@@ -21,11 +21,6 @@ require 'pagy/extras/bootstrap'
 # See https://ddnexus.github.io/pagy/extras/i18n
 require 'pagy/extras/i18n' 
 
-# Responsive: On resize, the number of page links will adapt in real-time to the available window or container width
-# See https://ddnexus.github.io/pagy/extras/responsive
-require 'pagy/extras/responsive' 
-
-
 # Pagy Variables
 # All the Pagy::VARS here are set for all the pagy instances but can be
 # overridden by just passing them to Pagy.new or the pagy controller method
