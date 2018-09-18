@@ -74,7 +74,9 @@ class DebtsController < ApplicationController
     end
   end
   
-  
+  # def preview_email
+  #
+  # end
 
   private
 

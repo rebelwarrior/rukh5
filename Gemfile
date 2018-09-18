@@ -41,6 +41,7 @@ gem 'listen', platforms: :jruby
 
 # Devise for User Login
 gem 'devise'
+gem 'devise-i18n'
 
 # Using HAML
 gem 'haml', platforms: :jruby
