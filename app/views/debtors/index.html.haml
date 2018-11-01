@@ -33,9 +33,7 @@
       = ""
     = render @debtors
 
-  = # will_paginate @debtors
-  :erb 
-    <%== pagy_nav_bootstrap(@pagy) %>
+  != pagy_nav_bootstrap(@pagy)
 -elsif @debtors.empty?
   %h4="#{t('debtors_views.no_results')} #{params[:search]}" 
 -else

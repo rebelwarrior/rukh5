@@ -44,8 +44,7 @@ gem 'devise'
 gem 'devise-i18n'
 
 # Using HAML
-gem 'haml', platforms: :jruby
-gem 'hamlit', platforms: :ruby
+gem 'hamlit'
 
 # Using Bootstrap
 gem 'jquery-rails'
@@ -53,8 +52,6 @@ gem 'popper_js'
 gem 'bootstrap', '~> 4.1.2' #'~> 4.0.0.beta3'
 
 # Pagination
-# gem 'will_paginate' # , '~> 3.0.7'
-# gem 'bootstrap-will_paginate'
 gem 'pagy', '>= 0.8.5'
 
 # Markdown
