@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-jruby_jars_version = '9.2.0.0'
+jruby_jars_version = '9.2.1.0'
 
 TODO = "Switch will paginate w/ kaminari or pagy"
 
@@ -79,7 +79,7 @@ group :development, :test do
   # Capybara (feature testing)
   gem 'capybara'
   # RuboCop for stylechecker
-  gem 'rubocop', '~> 0.49.1', require: false
+  gem 'rubocop', '~> 0.60.0', require: false
   gem 'rubocop-rspec', require: false
 end
 
