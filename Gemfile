@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-jruby_jars_version = '9.2.1.0'
+jruby_jars_version = '9.2.4.0'
 
 TODO = "Switch will paginate w/ kaminari or pagy"
 
