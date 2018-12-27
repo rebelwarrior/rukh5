@@ -32,6 +32,25 @@
 en:
   hello: "Hello world"
   title: "Rukh 5"
+  date:
+    abbr_month_names:
+    -
+    - Jan
+    - Feb
+    - Mar
+    - Apr
+    - May
+    - Jun
+    - Jul
+    - Aug
+    - Sept
+    - Oct
+    - Nov
+    - Dic
+    formats:
+      default: ! '%b, %d %Y'
+      long: ! '%A, %b, %d %Y'
+      short: ! '%b, %d.'
   help_page:
     title: "How to use Rukh"
     note: "Note:"
@@ -91,4 +110,20 @@ en:
     search_btn: "Search"
     no_results: "There are no results for:"
     resutls_for: "Results for:"
+    search: "Search"
+  debts_views:
+    index_title: "Invoices"
+    index_sub_title: "Invoices:"
+    dowload_all_debts: 'Download all invoices'
+    download_excel: Download Excel
+    download_xls: Download xls (LibreOffice)
+    download_csv: Download CSV
+    debts_listing: "Listing:"
+    debt_id: ID
+    debt_quantity: Amount
+    debt_date: Date
+    debtor_name: Name
+    import_csv_btn: Import a CSV
+    date_format: '%B, %d %Y'
+
   

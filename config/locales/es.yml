@@ -79,7 +79,7 @@ es:
     debtors_list: "Lista de Deudores"
     invoices: "Facturas"
     new_debtor: "Deudor Nuevo"
-    serch_debtor: "Buscar Deudor"
+    search_debtor: "Buscar Deudor"
   validation_error:
     must_be_date: 'Debe ser una fecha.'
     must_be_num: 'Debe ser un número.'
