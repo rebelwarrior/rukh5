@@ -94,5 +94,5 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'sprockets', '>= 3.7.2', '< 4.0.0' #'>= 4.0.0.beta8'
 
 
-## Internationalization Bug with 1.3.0 Locking to 1.1.1
-gem 'i18n', '1.1.1'
+## Internationalization Bug with 1.3.0 & JRuby - locking to 1.2
+gem 'i18n', '~> 1.2.0'
