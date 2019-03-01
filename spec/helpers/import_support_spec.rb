@@ -16,8 +16,8 @@ describe ImportSupport do
     expect(result).to eq({:a=>1, :b=>2, :c=>"", "a"=>"", "b"=>""})
   end
   it 'cleans up a dirty hash' do 
-    dirty_hash = {a: "We're at &the <begining> $of-the @world."}
-    clean_hash = {a: "Were at the begining of-the @world."}
+    dirty_hash = {a: "We're at &the <begining> $of-the @world.", b: "clean"}
+    clean_hash = {a: "Were at the begining of-the @world.", b: "clean"}
     expect(ImportSupport.sanitize_hash(dirty_hash)).to eq(clean_hash)
   end
 end

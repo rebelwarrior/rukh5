@@ -42,11 +42,9 @@ module ImportSupport
 
   def self.sanitize_hash(dirty_hash)
     ## Exchanges `/` for `-` then removes everything not[^ ] :word or - or . or space or @
-    cleaned_hash = {}
-    dirty_hash.each_pair do |key, dirty_string|
-      cleaned_hash.store(key, dirty_string.to_s.gsub(%r{/}, '-').gsub(/[^ [:word:]\-\.\@ ]/i, ''))
+    dirty_hash.transform_values do |dirty_string| 
+      dirty_string.to_s.gsub(%r{/}, '-').gsub(/[^ [:word:]\-\.\@ ]/i, '')
     end
-    cleaned_hash
   end
 
   def self.add_missing_keys(hash_record, keys_array = [], default_value = '')
