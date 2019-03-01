@@ -49,13 +49,13 @@ module ImportSupport
 
   def self.add_missing_keys(hash_record, keys_array = [], default_value = '')
     ## Adds missing keys from array, sets empty ones to an empty string.
-    clean_hash = keys_array.zip(Array.new(keys_array.size, default_value)).to_h
-    clean_hash.merge(hash_record)
+    keys_only_hash = keys_array.zip(Array.new(keys_array.size, default_value)).to_h
+    keys_only_hash.merge(hash_record)
   end
 
   def self.remove_nil_from_hash(hash_record, substitute_value = '')
     ## Removes nil from a hash values and replaces it with new value
-    ## Method keeps key simply replaces nil. 
+    ## Method keeps key simply replaces nil. Should be renamed. 
     if hash_record.value?(nil)
       hash_record.transform_values do |value|
         value.nil? ? substitute_value : value
