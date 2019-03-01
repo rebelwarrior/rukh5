@@ -48,9 +48,10 @@ gem 'hamlit'
 gem 'jquery-rails'
 gem 'popper_js'
 gem 'bootstrap', '~> 4.1.2' #'~> 4.0.0.beta3'
+# gem "bootstrap", ">= 4.3.1" depends on auto-prefixer
 
 # Pagination
-gem 'pagy', '>= 0.8.5'
+gem 'pagy', '1.2.1'
 
 # Markdown
 gem 'kramdown'
@@ -79,6 +80,8 @@ group :development, :test do
   # RuboCop for stylechecker
   gem 'rubocop', '~> 0.60.0', require: false
   gem 'rubocop-rspec', require: false
+  # Code smell checker 
+  gem 'reek', require: false 
 end
 
 group :deploy do

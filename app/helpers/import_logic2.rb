@@ -4,6 +4,7 @@ require 'smarter_csv'
 require 'import_support'
 require 'import_logic3'
 
+# Contains the logic for importing CSV files to the db. 
 class ImportLogic
   def self.import_csv(file)
     file_lines = FindFileLines.new.perform(file)
@@ -15,12 +16,13 @@ class ImportLogic
   end
 end
 
+# Finds the number of lines in a file.
 class FindFileLines
   include SuckerPunch::Job
 
   def perform(file)
     ## Open Files and Counts Lines
-    file.open { |f| find_number_lines(f) }
+    file.open { |opened_file| find_number_lines(opened_file) }
   end
 
   def find_number_lines(opened_file)
@@ -33,6 +35,7 @@ class FindFileLines
   end
 end
 
+# Guesses the Character Encoding of the file. 
 class CheckEncoding
   include SuckerPunch::Job
 
@@ -43,6 +46,7 @@ class CheckEncoding
   end
 end
 
+# Once the encoding is known and the lines it processes the CSV in chunks. 
 class ProcessCSV
   include SuckerPunch::Job
   def perform(file, _file_lines, char_set)
