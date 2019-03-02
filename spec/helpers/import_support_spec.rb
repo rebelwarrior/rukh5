@@ -20,4 +20,13 @@ describe ImportSupport do
     clean_hash = {a: "Were at the begining of-the @world.", b: "clean"}
     expect(ImportSupport.sanitize_hash(dirty_hash)).to eq(clean_hash)
   end
+  it 'imports key array from model removes "created_at" "updated_at" & adds extra' do
+    model = Struct.new(:null) do 
+      def attribute_names
+        %w[created_at updated_at name id]
+      end
+    end.new(nil)
+    import_array = ImportSupport.import_key_array(model, ["extra"])
+    expect(import_array).to eq(["name", "id", "extra"])
+  end  
 end

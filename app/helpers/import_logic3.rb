@@ -3,9 +3,21 @@ require 'cmess/guess_encoding'
 require 'smarter_csv'
 require 'import_support'
 
+# Class that stores records using threads
 class StoreRecord
   # Refactor: This Stores record.
   include SuckerPunch::Job
+  
+  def search_by_something(record, something, db_Debtor = Debtor)
+    # Returns nil if debtor not found otherwise returns debtor
+    return nil unless record[something]
+    return nil if record[something].strip.casecmp('null').zero?
+    db_Debtor.find_by something record.fetch(something)
+  end
+  
+  # def search_by_ein(record, db_Debtor = Debtor)
+  #   search_by_something(record, :employer_id_number, db_Debtor)
+  # end
 
   def search_by_ein(record, db_Debtor = Debtor)
     # Returns nil if debtor not found otherwise returns debtor
@@ -59,8 +71,9 @@ class StoreRecord
   end
 
   def debtor_record(record)
-    debtor_record = ImportSupport.add_missing_keys(record,
-                                                   ImportSupport.debtor_headers_array)
+    debtor_record = 
+      ImportSupport.add_missing_keys(record,
+        ImportSupport.debtor_headers_array)
     ImportSupport.remove_nil_from_hash(debtor_record, '')
   end
 

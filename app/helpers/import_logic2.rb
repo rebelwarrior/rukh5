@@ -26,7 +26,7 @@ class FindFileLines
   end
 
   def find_number_lines(opened_file)
-    ## Finds Total lines of Opened File and Rewinds File
+    ## Finds Total lines of Opened File / StringIO and Rewinds File
     total_lines = opened_file.each_line.inject(0) do |total, _amount|
       total + 1
     end
