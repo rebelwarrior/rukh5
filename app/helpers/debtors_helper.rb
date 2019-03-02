@@ -1,10 +1,11 @@
 # Methods to help Debtors 
-# Includes an example of refactoring for clarity and understanding
-# Note the refactoring shows the shortest method is not the clearest. 
+
 module DebtorsHelper
   include Pagy::Frontend
+  # Includes an example of refactoring for clarity and understanding
+  # Note the refactoring shows the shortest method is not the clearest. 
   
-  def display_tel_old(string)
+  def _display_tel_old(string)
     # Left here for documentation
     # first attempt refactored below.
     nums = string.split('')
@@ -14,7 +15,7 @@ module DebtorsHelper
     "(#{area_code})#{next_three}-#{last_four}"
   end
 
-  def display_tel_next(s)
+  def _display_tel_new(s)
     # Indexes the string back to front
     # to display as a telephone number format;
     # Refactored below for understandability.
@@ -31,5 +32,27 @@ module DebtorsHelper
 
   def display_ext(string)
     "ext: #{string} "
+  end
+end
+
+module DebtorsBackendHelper 
+  def self.remove_hyphens_from_numbers(term)
+    term.to_s.each_char.select { |x| x.match(/[0-9]/) }.join('')
+  end
+
+  def self.encrypt(token, digester = Digest::SHA1, salt = Rails.application.secrets.salt)
+    salted = salt(remove_hyphens_from_numbers(token), salt)
+    digester.hexdigest(salted.to_s)
+  end
+
+  def self.salt(token, salt = Rails.application.secrets.salt)
+    # salt stored in secrets.yml
+    fail(ArgumentError, 'Nil propagation, token not set', caller) if token.nil?
+    fail(ArgumentError, 'Rails Salt (config/secret.yml) not set', caller) if salt.nil?
+    token.to_i + salt
+  end
+
+  def self.guard_length(token, length = 9)
+    fail unless token.to_s.split('').size == length
   end
 end

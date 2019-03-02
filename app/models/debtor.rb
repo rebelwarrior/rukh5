@@ -53,6 +53,7 @@ class Debtor < ApplicationRecord
   end
 
   def self.clean_up_search_term(search_term)
+    # This method is tightly coupled
     case search_term
     when /\A([[:digit:]]{3}-[[:digit:]]{2}-[[:digit:]]{4})\z/
       # if name keep string
