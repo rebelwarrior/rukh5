@@ -40,4 +40,9 @@ describe DebtorsBackendHelper do
     expect(encrypted).to eq("1335")
   end
   
+  it "guard_length" do
+    error_msg = "Not proper length: 4. Expected 3."
+    expect { DebtorsBackendHelper::guard_length("1234", 3) }.to raise_error(error_msg)
+  end
+  
 end

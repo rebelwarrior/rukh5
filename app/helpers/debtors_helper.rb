@@ -53,6 +53,10 @@ module DebtorsBackendHelper
   end
 
   def self.guard_length(token, length = 9)
-    fail unless token.to_s.split('').size == length
+    # Should be renamed
+    size = token.to_s.size
+    unless size == length
+      fail "Not proper length: #{size}. Expected #{length}."
+    end
   end
 end
