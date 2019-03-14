@@ -19,8 +19,8 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # The Ruby Rhino does not support ES6 must lock autoprefixer-rails to 8.6.0 (even 8.6.5 fails)
-gem 'therubyrhino', platform: :jruby
-gem 'autoprefixer-rails', '8.6.0', platform: :jruby
+# gem 'therubyrhino', platform: :jruby # Removed for auto_prefixer
+gem 'autoprefixer-rails',  '>= 9.1.0' #'8.6.0', platform: :jruby
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -47,8 +47,9 @@ gem 'hamlit'
 # Using Bootstrap
 gem 'jquery-rails'
 gem 'popper_js'
-gem 'bootstrap', '~> 4.1.2' 
-# gem "bootstrap", ">= 4.3.1" #depends on auto-prefixer which requires node
+# gem 'bootstrap', '~> 4.1.2' 
+gem 'bootstrap', '>= 4.3.1' #depends on auto-prefixer which requires node
+# This change affects warble war making #TODO fix war
 
 # Pagination
 gem 'pagy', '~> 2.1.1'

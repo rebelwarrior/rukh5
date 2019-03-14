@@ -9,7 +9,6 @@ Warbler::Config.new do |config|
   # config.jar_name = "rukh5#{Time.now.to_i}"
   # config.jar_name = "rukh"
   # The double ## does versioning in Tomcat but kills the war in windows
-  # config.features = %w(executable)
   config.excludes = FileList["**/*/*.box"]
   config.includes = FileList["Rakefile"]
   config.webserver = 'jenkins-ci.winstone' #Winstone is default this is an imp ver
@@ -22,7 +21,7 @@ Warbler::Config.new do |config|
   # - gemjar: package the gem repository in a jar file in WEB-INF/lib
   # - executable: embed a web server and make the war executable
   # - compiled: compile .rb files to .class files
-  # config.features = %w(gemjar)
+  config.features = %w(compiled)
 
   # Application directories to be included in the webapp.
   config.dirs = %w(app config db lib log vendor tmp bin public)
