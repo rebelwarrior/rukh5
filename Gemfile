@@ -47,8 +47,8 @@ gem 'hamlit'
 # Using Bootstrap
 gem 'jquery-rails'
 gem 'popper_js'
-gem 'bootstrap', '~> 4.1.2' #'~> 4.0.0.beta3'
-# gem "bootstrap", ">= 4.3.1" depends on auto-prefixer
+gem 'bootstrap', '~> 4.1.2' 
+# gem "bootstrap", ">= 4.3.1" #depends on auto-prefixer which requires node
 
 # Pagination
 gem 'pagy', '~> 2.1.1'

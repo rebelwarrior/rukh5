@@ -288,7 +288,7 @@ GEM
       sprockets (>= 3.0.0)
     sucker_punch (2.1.1)
       concurrent-ruby (~> 1.0)
-    temple (0.8.0)
+    temple (0.8.1)
     therubyrhino (2.0.4)
       therubyrhino_jar (>= 1.7.3)
     therubyrhino_jar (1.7.6)
@@ -348,7 +348,7 @@ DEPENDENCIES
   jruby-jars (= 9.2.5.0)
   kramdown
   listen
-  pagy
+  pagy (~> 2.1.1)
   popper_js
   pry
   puma (~> 3.7)
