@@ -8,7 +8,7 @@ git_source(:github) do |repo_name|
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.2' 
+gem 'rails', '~> 5.2.2.1' 
 # Use jdbcsqlite3 as the database for Active Record
 gem 'activerecord-jdbcsqlite3-adapter'
 # Use Puma as the app server
@@ -63,8 +63,8 @@ gem 'pry'
 gem 'font-awesome-sass'
 
 # For CSV importing and exporting
-gem 'smarter_csv', require: false # , '~> 1.0.19' #1.0.19 is out...
-gem 'cmess', require: false # , '~> 0.4.1'
+gem 'smarter_csv', require: false
+gem 'cmess', require: false, git: 'https://github.com/rebelwarrior/cmess.git'
 gem 'celluloid', '~> 0.17.3', require: false
 gem 'sucker_punch', require: false
 

@@ -8,11 +8,11 @@ class StoreRecord
   # Refactor: This Stores record.
   include SuckerPunch::Job
   
-  def search_by_something(record, something, db_Debtor = Debtor)
+  def search_by_term(record, term, db_Debtor = Debtor)
     # Returns nil if debtor not found otherwise returns debtor
-    return nil unless record[something]
-    return nil if record[something].strip.casecmp('null').zero?
-    db_Debtor.find_by something record.fetch(something)
+    return nil unless record[term]
+    return nil if record[term].strip.casecmp('null').zero?
+    db_Debtor.find_by term record.fetch(term)
   end
   
   # def search_by_ein(record, db_Debtor = Debtor)

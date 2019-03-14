@@ -42,8 +42,14 @@ class CheckEncoding
   def perform(file)
     ## Guesses Encoding of File then returns string with encoding.
     input = File.read(file)
+    # CMess::GuessEncoding::Automatic.guess(input)
+    check_encoding(input)
+  end
+  
+  def check_encoding(input)
     CMess::GuessEncoding::Automatic.guess(input)
   end
+  
 end
 
 # Once the encoding is known and the lines it processes the CSV in chunks. 

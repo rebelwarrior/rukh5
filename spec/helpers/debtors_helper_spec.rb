@@ -31,9 +31,7 @@ describe DebtorsBackendHelper do
   
   it 'encrypts and salts' do
     digester = Struct.new("Digester") do 
-      def hexdigest(i)
-        i
-      end
+      def hexdigest(i); i; end
     end.new
     token = "123-4"
     encrypted = DebtorsBackendHelper::encrypt(token, digester, 101)
