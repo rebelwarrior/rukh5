@@ -51,7 +51,7 @@ gem 'bootstrap', '~> 4.1.2' #'~> 4.0.0.beta3'
 # gem "bootstrap", ">= 4.3.1" depends on auto-prefixer
 
 # Pagination
-gem 'pagy', '1.2.1'
+gem 'pagy', '~> 2.1.1'
 
 # Markdown
 gem 'kramdown'

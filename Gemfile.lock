@@ -175,7 +175,7 @@ GEM
     nokogiri (1.10.1-java)
     nuggets (1.6.0)
     orm_adapter (0.5.0)
-    pagy (1.2.1)
+    pagy (2.1.1)
     parallel (1.14.0)
     parser (2.6.0.0)
       ast (~> 2.4.0)
@@ -348,7 +348,7 @@ DEPENDENCIES
   jruby-jars (= 9.2.5.0)
   kramdown
   listen
-  pagy (= 1.2.1)
+  pagy
   popper_js
   pry
   puma (~> 3.7)

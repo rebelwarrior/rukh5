@@ -30,7 +30,7 @@
           = t('debts_views.debtor_name')  
         -@debts_all.each do |debt_item|
           = render partial: 'list_all_debts', :locals => { :debt => debt_item }
-        != pagy_nav_bootstrap(@pagy)
+        != pagy_bootstrap_nav(@pagy)
         /
 .row
   %aside.span6
