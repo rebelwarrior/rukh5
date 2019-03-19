@@ -15,6 +15,7 @@ Warbler::Config.new do |config|
   # config.webxml.rails.env = 'production'
   # config.webxml.customkey = { display_name: "NAMeIsAwesome!" }
   
+   config.public_html = FileList["public/**/*", "public/assets/.sprockets-manifest-*.json", ".ebextensions/**/*"]
   
   # Features: additional options controlling how the jar is built.
   # Currently the following features are supported:

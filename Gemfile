@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-jruby_jars_version = '9.2.5.0'
+jruby_jars_version = '9.2.6.0'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
