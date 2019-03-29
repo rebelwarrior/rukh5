@@ -9,10 +9,13 @@ class ModelDouble
   end
   
   def create(arr_hash) 
-    arr_hash = hash[0]
-    model = Struct.new(*hash.keys)
-    @model = model.new(*hash.values)
+    @model = arr_hash[0] #= hash[0]
   end
+
+  def to_h
+    @model
+  end
+  
 end
 
 describe StoreRecord do 
