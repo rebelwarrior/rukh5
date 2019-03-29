@@ -10,7 +10,7 @@
     %div
       = form_tag import_path, multipart: true do
         .custom-file
-          = file_field_tag :file, class: 'custom-file-input', lang: "#{I18n.locale.to_s}", id: 'customFileLang' #, accept: 'text/csv'
+          = file_field_tag :file, class: 'custom-file-input', lang: "#{I18n.locale.to_s}", id: 'customFileLang' , accept: 'text/csv'
           %label.custom-file-label{for: 'customFileLang'}
             = t('import_page.select_file')
         %p

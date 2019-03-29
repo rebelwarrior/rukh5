@@ -33,7 +33,6 @@ class ImportController < ApplicationController
 
   def import(file)
     before = Time.now
-    ## Can this be substituted by a throw catch block?
     begin 
       total_lines = ImportLogic.import_csv(file)
     rescue ImportSupport::ImportError => error_message
