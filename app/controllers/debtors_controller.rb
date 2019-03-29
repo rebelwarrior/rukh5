@@ -69,10 +69,10 @@ class DebtorsController < ApplicationController
   end
 
   def index
+    ##TODO this is not getting the locale param passed from the search action
     assign_current_user
 
     if params[:search].blank?
-      # Debtor.paginate(page: params[:page], per_page: 10)
       @pagy, @debtors = pagy(Debtor.all, items: 10)
     else
       @debtors = Debtor.search(params[:search])
@@ -91,8 +91,6 @@ class DebtorsController < ApplicationController
   end
 
   def debtor_params
-    # permited_params =
-    #   %i[name email tel ext address location employer_id_number ss_hex_digest]
     if user_signed_in?
       params.require(:debtor).permit(:name, :email, :tel, :ext, :address,
                                      :location,

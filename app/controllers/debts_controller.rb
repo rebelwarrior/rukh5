@@ -63,7 +63,6 @@ class DebtsController < ApplicationController
     when 'csv', 'xls' #, 'xlsx'
       @debts_all = Debt.all
     else
-      # @debts_all = Debt.paginate(page: params[:page], per_page: 10)
       @pagy, @debts_all = pagy(Debt.all, items: 10)
     end
     respond_to do |format|

@@ -36,8 +36,11 @@ module DebtorsHelper
 end
 
 module DebtorsBackendHelper 
+  include Utilities 
+  
   def self.remove_hyphens_from_numbers(term)
-    term.to_s.each_char.select { |x| x.match(/[0-9]/) }.join('')
+    Utilities::remove_hyphens(term)
+    # term.to_s.each_char.select { |x| x.match(/[0-9]/) }.join('')
   end
 
   def self.encrypt(token, digester = Digest::SHA1, salt = Rails.application.secrets.salt)

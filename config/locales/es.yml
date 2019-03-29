@@ -71,6 +71,7 @@ es:
       (Exporte a un CSV para ver cuales son.)
     records_imported: "Records Importados en:"
     seconds: segundos
+    import_failed: "Importación de Records falló"
   header:
     user: Usuario
     update_info: "Actualizar Información"
@@ -145,7 +146,7 @@ es:
     debt_date: Fecha
     debtor_name: Nombre
     import_csv_btn: Importar CSV
-    date_format: '%d de %B de %Y'
+    date_format: ! '%d de %b. de %Y'
     index_export: Facturas
     new_title: "Crear Factura Nueva"
     new_sub_title: Crear Una Nueva Factura

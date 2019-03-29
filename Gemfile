@@ -14,7 +14,7 @@ gem 'activerecord-jdbcsqlite3-adapter'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 5.0', require: false 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -74,10 +74,10 @@ gem 'action_policy'
 
 group :development, :test do
   # RSpec (testing)
-  gem 'rspec-rails'
-  gem 'factory_bot'
+  gem 'rspec-rails', require: false 
+  gem 'factory_bot', require: false
   # Capybara (feature testing)
-  gem 'capybara'
+  gem 'capybara', require: false 
   # RuboCop for stylechecker
   gem 'rubocop', '~> 0.60.0', require: false
   gem 'rubocop-rspec', require: false

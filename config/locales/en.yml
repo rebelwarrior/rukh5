@@ -88,6 +88,7 @@ en:
       (Export debts to a CSV to see what they are.)
     records_imported: "Records imported in:"
     segundos: seconds
+    import_failed: "Import Failed"
   header:
     user: User
     update_info: Update Information

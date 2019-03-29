@@ -22,7 +22,7 @@ Warbler::Config.new do |config|
   # - gemjar: package the gem repository in a jar file in WEB-INF/lib
   # - executable: embed a web server and make the war executable
   # - compiled: compile .rb files to .class files
-  config.features = %w(compiled)
+  config.features = %w(executable)
 
   # Application directories to be included in the webapp.
   config.dirs = %w(app config db lib log vendor tmp bin public)

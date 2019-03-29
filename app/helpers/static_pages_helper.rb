@@ -1,3 +1,3 @@
-# Empty 
+# Empty Module
 module StaticPagesHelper
 end

@@ -4,6 +4,7 @@ class ImportController < ApplicationController
   before_action :authenticate_user!
 
   def new
+    ## Doesn't have locale param.
     @import_title = t('import_page.title')
   end
 
@@ -15,9 +16,11 @@ class ImportController < ApplicationController
       redirect_to action: 'new', status: 303
     elsif file.headers['Content-Type: text/csv'] ||
           file.headers['Content-Type: application/vnd.ms-excel']
-      result = import(file)
-      flash[:notice] = import_notice(result)
-      flash[:notice] = t('import_page.imported')
+      result = import(file) ## Calls import function below
+      unless result[:error]
+        flash[:notice] = import_notice(result)
+        flash[:notice] = t('import_page.imported')
+      end
       redirect_to action: 'new'
     else
       flash[:error] = t('import_page.not_csv')
@@ -30,9 +33,15 @@ class ImportController < ApplicationController
 
   def import(file)
     before = Time.now
-    total_lines = ImportLogic.import_csv(file)
+    ## Can this be substituted by a throw catch block?
+    begin 
+      total_lines = ImportLogic.import_csv(file)
+    rescue ImportSupport::ImportError => error_message
+      flash[:error] = "#{t('import_page.import_failed')}: #{error_message}"
+      return {error: error_message }
+    end
     after = Time.now
-    { toal_time: after - before, total_lines: total_lines }
+    { toal_time: after - before, total_lines: total_lines , error: nil}
   end
 
   def import_notice(result = {})

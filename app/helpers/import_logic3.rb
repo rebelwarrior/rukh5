@@ -8,49 +8,49 @@ class StoreRecord
   # Refactor: This Stores record.
   include SuckerPunch::Job
   
-  def search_by_term(record, term, db_Debtor = Debtor)
+  def search_by_term(record, term, debtor_model = Debtor)
     # Returns nil if debtor not found otherwise returns debtor
     return nil unless record[term]
     return nil if record[term].strip.casecmp('null').zero?
-    db_Debtor.find_by term record.fetch(term)
+    debtor_model.find_by term record.fetch(term)
   end
   
-  # def search_by_ein(record, db_Debtor = Debtor)
-  #   search_by_something(record, :employer_id_number, db_Debtor)
+  # def search_by_ein(record, debtor_model = Debtor)
+  #   search_by_something(record, :employer_id_number, debtor_model)
   # end
 
-  def search_by_ein(record, db_Debtor = Debtor)
+  def search_by_ein(record, debtor_model = Debtor)
     # Returns nil if debtor not found otherwise returns debtor
     return nil unless record[:employer_id_number]
     return nil if record[:employer_id_number].strip.casecmp('null').zero?
-    db_Debtor.find_by employer_id_number: record.fetch(:employer_id_number)
+    debtor_model.find_by employer_id_number: record.fetch(:employer_id_number)
   end
 
-  def search_by_name(record, db_Debtor = Debtor)
+  def search_by_name(record, debtor_model = Debtor)
     # Returns nil if debtor not found otherwise returns debtor
     return nil unless record[:debtor_name]
     return nil if record[:debtor_name].strip.casecmp('null').zero?
-    db_Debtor.find_by(name: record.fetch(:debtor_name))
+    debtor_model.find_by(name: record.fetch(:debtor_name))
   end
 
-  def search_by_id(record, db_Debtor = Debtor)
+  def search_by_id(record, debtor_model = Debtor)
     # Returns nil if debtor not found otherwise returns debtor
     return nil unless record[:debtor_id]
     return nil if record[:debtor_id].strip.casecmp('null').zero?
-    db_Debtor.find_by(id: record.fetch(:debtor_id))
+    debtor_model.find_by(id: record.fetch(:debtor_id))
   end
 
-  def search_debtor_id(record, db_Debtor = Debtor)
+  def search_debtor_id(record, debtor_model = Debtor)
     # Returns debtor or nil
-    search_by_id(record, db_Debtor) or
-      search_by_ein(record, db_Debtor) or
-      search_by_name(record, db_Debtor) or
+    search_by_id(record, debtor_model) or
+      search_by_ein(record, debtor_model) or
+      search_by_name(record, debtor_model) or
       nil
   end
 
-  def find_debtor_id(record, db_Debtor = Debtor)
+  def find_debtor_id(record, debtor_model = Debtor)
     # Returns debtor_id or zero if not found.
-    debtor = search_debtor_id(record, db_Debtor)
+    debtor = search_debtor_id(record, debtor_model)
     debtor ? debtor.id : 0
   end
 
@@ -85,21 +85,48 @@ class StoreRecord
     debt_id   = record.fetch(:id, 0).to_i
     inc_array =    ImportSupport.import_key_array(Debt, ["debtor_name"])
     clean_record = ImportSupport.delete_all_keys_except(record, inc_array)
-
-    if !debtor_id.zero? && debt_id.zero?
+    
+    store_or_update_record(debtor_id, debt_id, inc_array, clean_record)
+    # if !debtor_id.zero? && debt_id.zero?
+    #   # Create new debt for existing debtor.
+    #   create_new_debt(clean_record, debtor_id)
+    # elsif debtor_id.zero? && debt_id.zero?
+    #   # Create new debt and new debtor
+    #   new_debtor = create_new_debtor(clean_record)
+    #   create_new_debt(clean_record, new_debtor.id)
+    # elsif !debtor_id.zero? && !debt_id.zero?
+    #   # Update existing debt for existing debtor.
+    #   update_debtor(clean_record)
+    #   update_debt(clean_record)
+    # else
+    #   # TODO: change fails into Flash message by using ImportError
+    #   fail ImportSupport::ImportError, "Can't understand import record: #{record}"
+    # end
+  end
+  
+  def store_or_update_record(debtor_id, debt_id, inc_array, clean_record)
+    debtor_id_zero = debtor_id.zero?
+    debt_id_zero   = debt_id.zero? 
+    
+    existing_debtor_with_new_debt      = !debtor_id_zero && debt_id_zero
+    new_debtor_with_new_debt           = debtor_id_zero && debt_id_zero 
+    existing_debtor_with_existing_debt = debtor_id_zero && !debtor_id_zero
+    
+    
+    if existing_debtor_with_new_debt
       # Create new debt for existing debtor.
       create_new_debt(clean_record, debtor_id)
-    elsif debtor_id.zero? && debt_id.zero?
+    elsif new_debtor_with_new_debt
       # Create new debt and new debtor
       new_debtor = create_new_debtor(clean_record)
       create_new_debt(clean_record, new_debtor.id)
-    elsif !debtor_id.zero? && !debt_id.zero?
+    elsif existing_debtor_with_existing_debt
       # Update existing debt for existing debtor.
       update_debtor(clean_record)
       update_debt(clean_record)
     else
       # TODO: change fails into Flash message by using ImportError
-      fail ImportSupport::ImportError, "Can't understand import record: #{record}"
+      fail ImportSupport::ImportError, "Can't understand import record: #{clean_record}"
     end
   end
 
@@ -107,27 +134,29 @@ class StoreRecord
   # The methods below all involve hacks to add or remove keys
   # TODO refactor these to be more systematic.
 
-  def create_new_debt(record, debtor_id, db_Debt = Debt)
+  # These can all be utility functions
+
+  def create_new_debt(record, debtor_id, debt_model = Debt)
     # Record must be cleaned otherwise extra parameters cause havok
     record[:debtor_id] = debtor_id
     record.delete :debtor_name
     record.delete :id
-    store_single_record(record, db_Debt, create: true)
+    store_single_record(record, debt_model, create: true)
   end
 
-  def update_debt(_record, db_Debt = Debt)
+  def update_debt(_record, debt_model = Debt)
     record[:debtor_id] = debtor_id
     record.delete :debtor_name
     record.delete :id
-    store_single_record(record, db_Debt, create: false, update: true)
+    store_single_record(record, debt_model, create: false, update: true)
   end
 
-  def update_debtor(record, db_Debtor = Debtor)
+  def update_debtor(record, debtor_model = Debtor)
     update_record = { name: record[:debtor_name], id: record[:debtor_id] }
-    store_single_record(update_record, db_Debtor, create: false, update: true)
+    store_single_record(update_record, debtor_model, create: false, update: true)
   end
 
-  def create_new_debtor(record, db_Debtor = Debtor)
-    store_single_record({ name: record[:debtor_name] }, db_Debtor, create: true)
+  def create_new_debtor(record, debtor_model = Debtor)
+    store_single_record({ name: record[:debtor_name] }, debtor_model, create: true)
   end
 end

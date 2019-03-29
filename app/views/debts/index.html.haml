@@ -7,8 +7,8 @@
     %section
       %h3
         = t('debts_views.dowload_all_debts')
-      %a{:href => "#{url_for debts_path(format: 'xlsx')}", :class => "btn btn-info disabled"}
-        = t('debts_views.download_excel')
+      / %a{:href => "#{url_for debts_path(format: 'xlsx')}", :class => "btn btn-info disabled"}
+      /  = t('debts_views.download_excel')
       %a{:href => "#{url_for debts_path(format: 'xls')}", :class => "btn btn-info"}
         = t('debts_views.download_xls')
       %a{:href => "#{url_for debts_path(format: 'csv')}", :class => "btn btn-info"}
