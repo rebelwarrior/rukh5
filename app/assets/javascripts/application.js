@@ -19,3 +19,4 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+//= require bs-custom-file-input

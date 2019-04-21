@@ -7,14 +7,15 @@ require 'import_support'
 class StoreRecord
   # Refactor: This Stores record.
   include SuckerPunch::Job
-  
+
   def search_by_term(record, term, debtor_model = Debtor)
     # Returns nil if debtor not found otherwise returns debtor
     return nil unless record[term]
     return nil if record[term].strip.casecmp('null').zero?
+
     debtor_model.find_by term record.fetch(term)
   end
-  
+
   # def search_by_ein(record, debtor_model = Debtor)
   #   search_by_something(record, :employer_id_number, debtor_model)
   # end
@@ -23,6 +24,7 @@ class StoreRecord
     # Returns nil if debtor not found otherwise returns debtor
     return nil unless record[:employer_id_number]
     return nil if record[:employer_id_number].strip.casecmp('null').zero?
+
     debtor_model.find_by employer_id_number: record.fetch(:employer_id_number)
   end
 
@@ -30,6 +32,7 @@ class StoreRecord
     # Returns nil if debtor not found otherwise returns debtor
     return nil unless record[:debtor_name]
     return nil if record[:debtor_name].strip.casecmp('null').zero?
+
     debtor_model.find_by(name: record.fetch(:debtor_name))
   end
 
@@ -37,6 +40,7 @@ class StoreRecord
     # Returns nil if debtor not found otherwise returns debtor
     return nil unless record[:debtor_id]
     return nil if record[:debtor_id].strip.casecmp('null').zero?
+
     debtor_model.find_by(id: record.fetch(:debtor_id))
   end
 
@@ -62,7 +66,7 @@ class StoreRecord
     elsif options[:update]
       # TODO: test update method
       fail ImportSupport::ImportError, "Update not implemented"
-      stored = model.update(cleaned_record)
+      # stored = model.update(cleaned_record)
     else
       fail ImportSupport::ImportError, 'No valid option given'
     end
@@ -71,64 +75,46 @@ class StoreRecord
   end
 
   def debtor_record(record)
-    debtor_record = 
+    debtor_record =
       ImportSupport.add_missing_keys(record,
-        ImportSupport.debtor_headers_array)
+                                     ImportSupport.debtor_headers_array)
     ImportSupport.remove_nil_from_hash(debtor_record, '')
   end
 
-  # rubocop:disable Metrics/AbcSize
-  # rubocop:disable Metrics/CyclomaticComplexity
-  # rubocop:disable Metrics/PerceivedComplexity
   def perform(record)
     debtor_id = find_debtor_id(record)
     debt_id   = record.fetch(:id, 0).to_i
     inc_array =    ImportSupport.import_key_array(Debt, ["debtor_name"])
     clean_record = ImportSupport.delete_all_keys_except(record, inc_array)
-    
-    store_or_update_record(debtor_id, debt_id, inc_array, clean_record)
-    # if !debtor_id.zero? && debt_id.zero?
-    #   # Create new debt for existing debtor.
-    #   create_new_debt(clean_record, debtor_id)
-    # elsif debtor_id.zero? && debt_id.zero?
-    #   # Create new debt and new debtor
-    #   new_debtor = create_new_debtor(clean_record)
-    #   create_new_debt(clean_record, new_debtor.id)
-    # elsif !debtor_id.zero? && !debt_id.zero?
-    #   # Update existing debt for existing debtor.
-    #   update_debtor(clean_record)
-    #   update_debt(clean_record)
-    # else
-    #   # TODO: change fails into Flash message by using ImportError
-    #   fail ImportSupport::ImportError, "Can't understand import record: #{record}"
-    # end
+
+    store_or_update_record(debtor_id, debt_id, clean_record)
   end
-  
-  def store_or_update_record(debtor_id, debt_id, inc_array, clean_record)
+
+  # rubocop:disable Metrics/CyclomaticComplexity
+  # rubocop:disable Metrics/PerceivedComplexity
+  def store_or_update_record(debtor_id, debt_id, clean_record)
     debtor_id_zero = debtor_id.zero?
-    debt_id_zero   = debt_id.zero? 
-    
+    debt_id_zero   = debt_id.zero?
+
     existing_debtor_with_new_debt      = !debtor_id_zero && debt_id_zero
-    new_debtor_with_new_debt           = debtor_id_zero && debt_id_zero 
+    new_debtor_with_new_debt           = debtor_id_zero && debt_id_zero
     existing_debtor_with_existing_debt = debtor_id_zero && !debtor_id_zero
-    
-    
+
     if existing_debtor_with_new_debt
       # Create new debt for existing debtor.
       create_new_debt(clean_record, debtor_id)
     elsif new_debtor_with_new_debt
       # Create new debt and new debtor
-      new_debtor = create_new_debtor(clean_record)
-      create_new_debt(clean_record, new_debtor.id)
+      create_new_debt(clean_record, create_new_debtor(clean_record).id)
     elsif existing_debtor_with_existing_debt
       # Update existing debt for existing debtor.
-      update_debtor(clean_record)
-      update_debt(clean_record)
+      update_debtor(clean_record) && update_debt(clean_record)
     else
-      # TODO: change fails into Flash message by using ImportError
       fail ImportSupport::ImportError, "Can't understand import record: #{clean_record}"
     end
   end
+  # rubocop:enable Metrics/CyclomaticComplexity
+  # rubocop:enable Metrics/PerceivedComplexity
 
   ## Incomplete Methods ##
   # The methods below all involve hacks to add or remove keys

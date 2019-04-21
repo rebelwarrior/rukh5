@@ -3,15 +3,16 @@ class Debt < ApplicationRecord
   belongs_to :debtor, touch: true
 
   ## Regular Expressions for Validations
-  VALID_NUM_REGEX = /\A[[:digit:]]+\.?[[:digit:]]*\z/
+  VALID_NUM_REGEX = /\A[[:digit:]]+\.?[[:digit:]]*\z/.freeze
   VALID_PERMIT_REGEX = \
-    /[[:alpha:]]{2}-?[[:alpha:]]{2}-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}-?[0-9]{1}/i
-  VALID_INFRACTION_REGEX = /[[:alpha:]]-?[0-9]{2}-?[0-9]{2}-?[0-9]{3}-?[[:alpha:]]{2}/i
+    /[[:alpha:]]{2}-?[[:alpha:]]{2}-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}-?[0-9]{1}/i.freeze
+  VALID_INFRACTION_REGEX = /[[:alpha:]]-?[0-9]{2}-?[0-9]{2}-?[0-9]{3}-?[[:alpha:]]{2}/i.freeze
   VALID_PERMIT_OR_INFRACTION_REGEX = \
-    /\A#{VALID_INFRACTION_REGEX}|#{VALID_PERMIT_REGEX}\z/
+    /\A#{VALID_INFRACTION_REGEX}|#{VALID_PERMIT_REGEX}\z/.freeze
   VALID_DATE_REGEX = \
     %r~\A([0-9]{1,2}(\/?|-?)[0-9]{1,2}(\/?|-?)[0-9]{4}|[0-9]{4}(\/?|-?)[0-9]{1,2}(\/?|-?)[0-9]{1,2})\z~
-  VALID_ROUTING_NUM_REGEX = /(\A\z|\A[0-9]{9}\z)/
+    .freeze
+  VALID_ROUTING_NUM_REGEX = /(\A\z|\A[0-9]{9}\z)/.freeze
 
   ## Validations
   validates :debtor_id,          presence: true
@@ -20,8 +21,8 @@ class Debt < ApplicationRecord
                                            message: I18n.t('validation_error.must_be_date') }
   validates :pending_balance, format: { with: VALID_NUM_REGEX,
                                         message: I18n.t('validation_error.must_be_num') }
-  # validates :bounced_check_number,               format: { with: /\A[[:digit:]]*\z/i,
-  #                                                          message: I18n.t('validation_error.must_be_num') }
+  # validates :bounced_check_number,format: { with: /\A[[:digit:]]*\z/i,
+  #                           message: I18n.t('validation_error.must_be_num') }
   validates :infraction_number, format: { with: /\A#{VALID_INFRACTION_REGEX}\z/,
                                           message: I18n.t('validation_error.must_be_infraction_num') },
                                 unless: proc { |debt_ex| debt_ex.infraction_number.blank? }

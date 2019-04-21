@@ -28,19 +28,20 @@ class ImportController < ApplicationController
       redirect_to action: 'new', status: 303
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   private
 
   def import(file)
     before = Time.now
-    begin 
+    begin
       total_lines = ImportLogic.import_csv(file)
     rescue ImportSupport::ImportError => error_message
       flash[:error] = "#{t('import_page.import_failed')}: #{error_message}"
-      return {error: error_message }
+      return { error: error_message }
     end
     after = Time.now
-    { toal_time: after - before, total_lines: total_lines , error: nil}
+    { toal_time: after - before, total_lines: total_lines, error: nil }
   end
 
   def import_notice(result = {})

@@ -4,7 +4,7 @@ require 'smarter_csv'
 require 'import_support'
 require 'import_logic3'
 
-# Contains the logic for importing CSV files to the db. 
+# Contains the logic for importing CSV files to the db.
 class ImportLogic
   def self.import_csv(file)
     file_lines = FindFileLines.new.perform(file)
@@ -35,7 +35,7 @@ class FindFileLines
   end
 end
 
-# Guesses the Character Encoding of the file. 
+# Guesses the Character Encoding of the file.
 class CheckEncoding
   include SuckerPunch::Job
 
@@ -45,16 +45,16 @@ class CheckEncoding
     # CMess::GuessEncoding::Automatic.guess(input)
     check_encoding(input)
   end
-  
+
   def check_encoding(input)
     CMess::GuessEncoding::Automatic.guess(input)
   end
-  
 end
 
-# Once the encoding is known and the lines it processes the CSV in chunks. 
+# Once the encoding is known and the lines it processes the CSV in chunks.
 class ProcessCSV
   include SuckerPunch::Job
+
   def perform(file, _file_lines, char_set)
     counter = []
     ActiveRecord::Base.connection_pool.with_connection do
@@ -69,11 +69,11 @@ class ProcessCSV
             # appends in latest record to allow error to report where import failed
             counter << sanitized_row
             puts "\033[32m#Processed Record No. #{counter.size}.\033[0m\n"
-            counter
           end
         end
       end
       ## Run Job here for Progress Bar
     end
+    counter
   end
 end

@@ -40,5 +40,8 @@ module Rukh5
 
     # Set the default language to Spanish
     config.i18n.default_locale = :es
+    
+    # Adding Yarn (JS NPM) packages to asset path
+    config.assets.paths << Rails.root.join('node_modules')
   end
 end

@@ -1,7 +1,7 @@
 class DebtsController < ApplicationController
   before_action :authenticate_user!
   ## Mailing Actions should be included here.
-  
+
   include Pagy::Backend
 
   ## Resource Actions ##
@@ -28,6 +28,7 @@ class DebtsController < ApplicationController
     assign_current_user
     @debtor = Debtor.find_by_id(params[:debtor_id])
     fail if @debtor.nil?
+
     params[:debt][:debtor_id] = @debtor.id
     @debt = Debt.new(debt_params)
     # @debt.infraction_number = strip_hyphens(@debt.infraction_number)
@@ -40,6 +41,7 @@ class DebtsController < ApplicationController
       render 'new'
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   def update
     assign_current_user
@@ -60,7 +62,7 @@ class DebtsController < ApplicationController
     #  Responds to xls and csv format and uses pagination
     assign_current_user
     case params['format']
-    when 'csv', 'xls' #, 'xlsx'
+    when 'csv', 'xls' # , 'xlsx'
       @debts_all = Debt.all
     else
       @pagy, @debts_all = pagy(Debt.all, items: 10)
@@ -72,7 +74,7 @@ class DebtsController < ApplicationController
       format.csv { send_data @debts_all.to_csv }
     end
   end
-  
+
   # def preview_email
   #
   # end

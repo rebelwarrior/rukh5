@@ -1,8 +1,7 @@
 class DebtorsController < ApplicationController
   before_action :authenticate_user!
-  
+
   include Pagy::Backend
-  
 
   ## Resource Actions ##
   def new
@@ -69,7 +68,7 @@ class DebtorsController < ApplicationController
   end
 
   def index
-    ##TODO this is not getting the locale param passed from the search action
+    # #TODO this is not getting the locale param passed from the search action
     assign_current_user
 
     if params[:search].blank?

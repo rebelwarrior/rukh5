@@ -11,10 +11,10 @@ class Debtor < ApplicationRecord
   before_save { self.tel = tel ? Debtor.remove_hyphens(tel) : '' }
 
   ## REGEX
-  VALID_EMAIL_REGEX = /\A(\z|[\w+\-.]+@[a-z\d\-.]+\.[a-z]+)\z/i
-  VALID_TEL_REGEX = /\A(\z|([0-9]{3}-?[0-9]{3}-?[0-9]{4}))\z/
-  VALID_EIN_REGEX = /\A(\z|([0-9]{2})-?([0-9]{7}))\z/
-  VALID_SS_REGEX = /\A(\z|([0-9]{3}-?[0-9]{2}-?[0-9]{4}))\z/
+  VALID_EMAIL_REGEX = /\A(\z|[\w+\-.]+@[a-z\d\-.]+\.[a-z]+)\z/i.freeze
+  VALID_TEL_REGEX = /\A(\z|([0-9]{3}-?[0-9]{3}-?[0-9]{4}))\z/.freeze
+  VALID_EIN_REGEX = /\A(\z|([0-9]{2})-?([0-9]{7}))\z/.freeze
+  VALID_SS_REGEX = /\A(\z|([0-9]{3}-?[0-9]{2}-?[0-9]{4}))\z/.freeze
 
   ## Validations
   validates :name, presence: true
@@ -84,6 +84,7 @@ class Debtor < ApplicationRecord
     # salt stored in secrets.yml
     fail(ArgumentError, 'Nil propagation, token not set', caller) if token.nil?
     fail(ArgumentError, 'Rails Salt (config/secret.yml) not set', caller) if salt.nil?
+
     token.to_i + salt
   end
 

@@ -1,8 +1,8 @@
 wb = xlsx_package.workbook
-blue = wb.styles.add_style :color => "#00FF00"
+blue = wb.styles.add_style color: "#00FF00"
 wb.add_worksheet(name: I18n.t('debts_views.index_export')) do |sheet|
   sheet.add_row [
-    "Debt id"
+    "Debt id",
     "Infraction Number",
     "Pending Balance",
     "Original Debt Balance",
@@ -13,10 +13,10 @@ wb.add_worksheet(name: I18n.t('debts_views.index_export')) do |sheet|
     "Fimas ID",
     "Created At",
     "Last Updated At"
-    ], style: blue 
+  ], style: blue
   @debts_all.each do |factura|
     sheet.add_row [
-      factura.id, 
+      factura.id,
       factura.infraction_number,
       factura.pending_balance,
       factura.original_balance,
@@ -30,4 +30,3 @@ wb.add_worksheet(name: I18n.t('debts_views.index_export')) do |sheet|
     ]
   end
 end
-

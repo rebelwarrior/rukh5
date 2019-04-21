@@ -14,8 +14,8 @@ class NotificationsMailer < ApplicationMailer
     add_signature!
 
     mail(from: @user.email,
-         to:   @debt.debtor.email,
-         bcc:  @user.email,
+         to: @debt.debtor.email,
+         bcc: @user.email,
          subject: t('notifications_mailer.first_notice.subject'), &:html)
   end
 
@@ -29,8 +29,8 @@ class NotificationsMailer < ApplicationMailer
     add_signature!
 
     mail(from: @user.email,
-         to:   @debt.debtor.email,
-         bcc:  @user.email,
+         to: @debt.debtor.email,
+         bcc: @user.email,
          subject: t('notifications_mailer.second_notice.subject'), &:html)
   end
 

@@ -1,10 +1,10 @@
-# Methods to help Debtors 
+# Methods to help Debtors
 
 module DebtorsHelper
   include Pagy::Frontend
   # Includes an example of refactoring for clarity and understanding
-  # Note the refactoring shows the shortest method is not the clearest. 
-  
+  # Note the refactoring shows the shortest method is not the clearest.
+
   def _display_tel_old(string)
     # Left here for documentation
     # first attempt refactored below.
@@ -15,12 +15,14 @@ module DebtorsHelper
     "(#{area_code})#{next_three}-#{last_four}"
   end
 
+  # rubocop:disable Naming/UncommunicativeMethodParamName
   def _display_tel_new(s)
     # Indexes the string back to front
     # to display as a telephone number format;
     # Refactored below for understandability.
     "(#{s[-10..-8]})#{s[-7..-5]}-#{s[-4..-1]}"
   end
+  # rubocop:enable Naming/UncommunicativeMethodParamName
 
   def display_tel(string)
     # Display as a telephone number format.
@@ -35,11 +37,11 @@ module DebtorsHelper
   end
 end
 
-module DebtorsBackendHelper 
-  include Utilities 
-  
+module DebtorsBackendHelper
+  include Utilities
+
   def self.remove_hyphens_from_numbers(term)
-    Utilities::remove_hyphens(term)
+    Utilities.remove_hyphens(term)
     # term.to_s.each_char.select { |x| x.match(/[0-9]/) }.join('')
   end
 
@@ -52,14 +54,13 @@ module DebtorsBackendHelper
     # salt stored in secrets.yml
     fail(ArgumentError, 'Nil propagation, token not set', caller) if token.nil?
     fail(ArgumentError, 'Rails Salt (config/secret.yml) not set', caller) if salt.nil?
+
     token.to_i + salt
   end
 
   def self.guard_length(token, length = 9)
     # Should be renamed
     size = token.to_s.size
-    unless size == length
-      fail "Not proper length: #{size}. Expected #{length}."
-    end
+    fail "Not proper length: #{size}. Expected #{length}." unless size == length
   end
 end

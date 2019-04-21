@@ -1,4 +1,4 @@
-# Module with methods to support the Import Action 
+# Module with methods to support the Import Action
 module ImportSupport
   def self.import_key_array(model, extra = [])
     model.attribute_names - %w[created_at updated_at] + extra
@@ -42,7 +42,7 @@ module ImportSupport
 
   def self.sanitize_hash(dirty_hash)
     ## Exchanges `/` for `-` then removes everything not[^ ] :word or - or . or space or @
-    dirty_hash.transform_values do |dirty_string| 
+    dirty_hash.transform_values do |dirty_string|
       dirty_string.to_s.gsub(%r{/}, '-').gsub(/[^ [:word:]\-\.\@ ]/i, '')
     end
   end
@@ -55,7 +55,7 @@ module ImportSupport
 
   def self.remove_nil_from_hash(hash_record, substitute_value = '')
     ## Removes nil from a hash values and replaces it with new value
-    ## Method keeps key simply replaces nil. Should be renamed. 
+    ## Method keeps key simply replaces nil. Should be renamed.
     if hash_record.value?(nil)
       hash_record.transform_values do |value|
         value.nil? ? substitute_value : value
