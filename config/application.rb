@@ -43,5 +43,8 @@ module Rukh5
     
     # Adding Yarn (JS NPM) packages to asset path
     config.assets.paths << Rails.root.join('node_modules')
+    
+    # Adding vendor folder for JS
+    config.assets.paths << Rails.root.join('vendor')
   end
 end
