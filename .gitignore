@@ -57,3 +57,5 @@ config/database.yml
 # Ignore Development Database
 /db/development.sqlite3
 
+# Ignore Public Assets
+/public/assets/
