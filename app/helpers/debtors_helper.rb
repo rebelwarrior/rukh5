@@ -8,7 +8,7 @@ module DebtorsHelper
   def _display_tel_old(string)
     # Left here for documentation
     # first attempt refactored below.
-    nums = string.split('')
+    nums = string.to_str.split('')
     last_four = nums.pop(4).join('')
     next_three = nums.pop(3).join('')
     area_code = nums.pop(3).join('')
@@ -25,6 +25,7 @@ module DebtorsHelper
   # rubocop:enable Naming/UncommunicativeMethodParamName
 
   def display_tel(string)
+    string = string.to_str
     # Display as a telephone number format.
     last_four  = string[-4..-1]
     next_three = string[-7..-5]
@@ -39,28 +40,30 @@ end
 
 module DebtorsBackendHelper
   include Utilities
+  extend self
 
-  def self.remove_hyphens_from_numbers(term)
+  def remove_hyphens_from_numbers(term)
     Utilities.remove_hyphens(term)
     # term.to_s.each_char.select { |x| x.match(/[0-9]/) }.join('')
   end
 
-  def self.encrypt(token, digester = Digest::SHA1, salt = Rails.application.secrets.salt)
+  def encrypt(token, digester = Digest::SHA1, salt = Rails.application.secrets.salt)
     salted = salt(remove_hyphens_from_numbers(token), salt)
     digester.hexdigest(salted.to_s)
   end
 
-  def self.salt(token, salt = Rails.application.secrets.salt)
+  def salt(token, salt = Rails.application.secrets.salt)
     # salt stored in secrets.yml
     fail(ArgumentError, 'Nil propagation, token not set', caller) if token.nil?
-    fail(ArgumentError, 'Rails Salt (config/secret.yml) not set', caller) if salt.nil?
+    fail(ArgumentError, 'Rails Salt (config/secrets.yml) not set', caller) if salt.nil?
 
     token.to_i + salt
   end
 
-  def self.guard_length(token, length = 9)
+  def guard_length(token, length = 9)
     # Should be renamed
     size = token.to_s.size
+    length = length.to_int
     fail "Not proper length: #{size}. Expected #{length}." unless size == length
   end
 end

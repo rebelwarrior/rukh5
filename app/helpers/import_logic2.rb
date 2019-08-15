@@ -47,6 +47,7 @@ class CheckEncoding
   end
 
   def check_encoding(input)
+    # what is input supposed to be? a string?
     CMess::GuessEncoding::Automatic.guess(input)
   end
 end

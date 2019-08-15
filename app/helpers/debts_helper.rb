@@ -4,6 +4,6 @@ module DebtsHelper
   include Pagy::Frontend
 
   def remove_hyphens(term)
-    term.to_s.each_char.select { |x| x.match(/[0-9]/) }.join('')
+    term.to_str.each_char.select { |x| x.match(/[0-9]/) }.join('')
   end
 end
