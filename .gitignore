@@ -63,3 +63,6 @@ config/database.yml
 
 # Ignore Public Assets
 /public/assets/
+
+# Ignore CircleCI for now
+/.circleci
