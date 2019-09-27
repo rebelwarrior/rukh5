@@ -14,7 +14,7 @@ gem 'activerecord-jdbcsqlite3-adapter'
 # Use Puma as the app server
 gem 'puma', '~> 4.2'
 # Use SCSS for stylesheets
-gem 'sassc-rails', require: true  #, '~> 5.0', require: false
+gem 'sassc-rails', require: false #'~> 5.0',
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 4.2.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
