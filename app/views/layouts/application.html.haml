@@ -1,0 +1,19 @@
+!!!5
+%html
+  %head
+    %title
+      = "Rukh5 | " + yield(:title)
+    = csrf_meta_tags
+    = stylesheet_link_tag("application", media: "all", "data-turbolinks-track": "reload" )
+    = javascript_include_tag("application", "data-turbolinks-track": "reload")
+  %body
+    = render("layouts/header")
+    .container
+      - flash.each do |key, message|
+        - notice = {"error" => "danger", "notice" => "info", "success" => "success"}.fetch(key, "warning")
+        %div{role => "alert"}{class => #{"alert alert-#{notice} #{notice}%"} }
+        = message 
+      = yield
+      = render("layouts/footer") 
+      = if Rails.env.development? then debug(params) end
+/

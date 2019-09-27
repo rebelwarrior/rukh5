@@ -15,11 +15,10 @@
 #   $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 # )
 
-App.cable.subscriptions.create { channel: "ImportChannel"},
+App.cable.subscriptions.create { channel: "ImportChannel" },
   connected: -> 
     console.log("connected")
     
   recieved: (data)->
     console.log(data)
     # Updating progress bar here. 
-}

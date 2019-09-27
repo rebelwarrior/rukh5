@@ -16,7 +16,7 @@ gem 'puma', '~> 4.2'
 # Use SCSS for stylesheets
 gem 'sassc-rails', require: true  #, '~> 5.0', require: false
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier', '>= 4.2.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # The Ruby Rhino does not support ES6 must lock autoprefixer-rails to 8.6.0 (even 8.6.5 fails)
 # gem 'therubyrhino', platform: :jruby # Removed for auto_prefixer
