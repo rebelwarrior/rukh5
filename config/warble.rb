@@ -6,6 +6,9 @@
 
 # Warbler web application assembly configuration file
 Warbler::Config.new do |config|
+  config.gem_path = "WEB-INF/gems" #trying to fix tomcat not finding gems
+  
+  
   # config.jar_name = "rukh5#{Time.now.to_i}"
   # config.jar_name = "rukh"
   ## The double ## does versioning in Tomcat but kills the war in windows
