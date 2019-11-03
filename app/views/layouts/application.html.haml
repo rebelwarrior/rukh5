@@ -11,8 +11,9 @@
     .container
       - flash.each do |key, message|
         - notice = {"error" => "danger", "notice" => "info", "success" => "success"}.fetch(key, "warning")
-        %div{role => "alert"}{class => #{"alert alert-#{notice} #{notice}%"} }
-        = message 
+        - alert_text ="alert alert-#{notice} #{notice}"
+        %div{:role => 'alert', :class => alert_text }
+          = message 
       = yield
       = render("layouts/footer") 
       = if Rails.env.development? then debug(params) end
