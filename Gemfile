@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-jruby_jars_version = '9.2.9.0'
+jruby_jars_version = '9.2.10.0'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -8,7 +8,7 @@ git_source(:github) do |repo_name|
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.3' 
+gem 'rails', '~> 5.2' 
 # Use jdbcsqlite3 as the database for Active Record
 gem 'activerecord-jdbcsqlite3-adapter'
 # Use Puma as the app server
@@ -83,6 +83,7 @@ group :development, :test do
   gem 'rubocop-rspec', require: false
   # Code smell checker 
   gem 'reek', require: false 
+  gem 'bundler-leak', require: false
 end
 
 group :deploy do
@@ -99,4 +100,4 @@ gem 'sprockets', '>= 3.7.2', '< 4.0.0' #'>= 4.0.0.beta8'
 
 
 ## Internationalization Bug with 1.3.0 & JRuby - locking to 1.2
-gem 'i18n', '~> 1.2.0'
+gem 'i18n'#, '~> 1.2.0'

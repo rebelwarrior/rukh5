@@ -23,7 +23,7 @@ namespace :tomcat do
     def idenfity_version
       version = Dir.entries('/usr/local/Cellar/tomcat/').last
       puts "Tomcat Version #{version}"
-      fail unless version =~ /\A[0-9]+\.[0-9]+\.[0-9]+\z/
+      fail unless version =~ /\A[0-9]+\.[0-9]+\.[0-9]+/
       version
     end
 

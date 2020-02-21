@@ -2,6 +2,7 @@
 
 = form_tag debtors_path, :method => 'get' do
   -# debtors_path might not be best?
+  = hidden_field_tag("locale", params[:locale])
   %p
     = search_field_tag :search, params[:search]
     .btn-group 

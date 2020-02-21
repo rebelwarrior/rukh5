@@ -1,7 +1,10 @@
 - provide(:title, t('debtors_views.search'))
+- provide(:locale, params[:locale])
 
 = form_tag debtors_path, :method => 'get' do
   -# debtors_path might not be best?
+  / %input{"name" => "locale", "type" => "hidden", "value" => params[:locale]}
+  = hidden_field_tag("locale", params[:locale])
   %p{:class => 'col-md-8_'}
     = search_field_tag :search, params[:search]
     .btn-group
