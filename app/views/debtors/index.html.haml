@@ -34,7 +34,6 @@
         = t('table_headers.ein')
       %th{:'data-field' => "owed", :'data-sortable' => "true"}
         %a{:href => debtors_path(:direction => toggle_direction(@direction), :sort => 'total_balance')}
-          -# This isn't working because owed is not a debtor column?
           = t('table_headers.owed')
           %i{:class => sort_arrows(@direction)}
       %td
@@ -51,10 +50,8 @@
     %thead
       %th{:class => "table-header" } 
         = t('table_headers.id')
-      %th{:'data-field' => "name", :'data-sortable' => "true"}     
-        %a{:href => debtors_path(:direction => toggle_direction(@direction), :sort => 'name')}
-          = t('table_headers.debtor')
-          %i{:class => sort_arrows(@direction)}
+      %th
+        = t('table_headers.debtor')
       %th
         = t('table_headers.tel')
       %th

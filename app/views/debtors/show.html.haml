@@ -65,4 +65,4 @@
     %strong
       = t('debtors_views.invoice') if @debtor.respond_to?(:debts) && !@debtor.debts.blank?
   .col-md-8
-    = #render @debtor.debts
+    = render @debtor.debts
