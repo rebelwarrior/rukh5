@@ -36,17 +36,18 @@ class Debtor < ApplicationRecord
                                             message: I18n.t('validation_error.must_be_valid_ss') }
 
   ## Methods
-  def self.search(search_term)
+  def self.search(search_term, sort_order="debtor.id desc")
     search_term = clean_up_search_term(search_term)
     term_class = search_term.class
 
     if term_class == Integer
-      where('employer_id_number LIKE ?', "%#{search_term}%")
+      where('employer_id_number LIKE ?', "%#{search_term}%").order(sort_order)
     elsif term_class == HexString # For API
-      where('ss_hex_digest LIKE ?', "%#{search_term}%")
+      where('ss_hex_digest LIKE ?', "%#{search_term}%").order(sort_order)
     elsif term_class == String
       where('LOWER(name) LIKE ? OR employer_id_number LIKE ? OR email LIKE ?',
-            "%#{search_term}%", "%#{search_term}%", "%#{search_term}%")
+            "%#{search_term}%", "%#{search_term}%", 
+            "%#{search_term}%").order(sort_order)
     else
       fail I18n.t('flash.debtor_search_failed')
     end
@@ -92,3 +93,9 @@ class Debtor < ApplicationRecord
     fail unless token.to_s.split('').size == length
   end
 end
+# Debtor.includes(:debts).group('debts.pending_balance').order('debts.id DESC').references(:debts)
+# Debtor.includes(:debts).order('debts.id DESC').references(:debts)
+# Debtor.joins(:debts).order("debts.pending_balance desc") # how to count
+# Debtor.joins(:debts).order("COUNT(debts.pending_balance) desc")
+# Debtor.joins(:debts).order(Arel.sql("COUNT(debts.pending_balance) desc"))
+# Debtor.joins(:debts).group('debts.pending_balance').order(Arel.sql("COUNT(debts.pending_balance) desc")).references(:debts)

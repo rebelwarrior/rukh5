@@ -61,7 +61,9 @@ class DebtorsController < ApplicationController
       else
         render 'edit'
       end
-    rescue ActiveRecord::RecordNotUnique, ActiveRecord::StatementInvalid, ActiveRecord::JDBCError => e
+    rescue ActiveRecord::RecordNotUnique, 
+           ActiveRecord::StatementInvalid, 
+           ActiveRecord::JDBCError => e
       flash.now[:error] = "#{I18n.t('flash.error_on_record_creation')} \t#{e.message}"
       render 'new'
     end
@@ -71,19 +73,43 @@ class DebtorsController < ApplicationController
     # #TODO this is not getting the locale param passed from the search action
     assign_current_user
 
+    sort_order = (sort_column + " " + sort_direction)
+    @direction = sort_direction 
     if params[:search].blank?
-      @pagy, @debtors = pagy(Debtor.all, items: 10)
+      @pagy, @debtors = pagy(Debtor.all.includes(:debts).order(sort_order), items: 10)
+    elsif params[:sort] == 'total_balance'
+      @debtors = Debtor.joins(:debts)
+        .group('debts.pending_balance')
+        .order(Arel.sql("SUM(debts.pending_balance) #{sort_direction}"))
+        .references(:debts)
     else
-      @debtors = Debtor.search(params[:search])
+      @debtors = Debtor.search(params[:search], sort_order)
     end
   end
 
   ## Additional Methods ##
   def search
-    @debtor = Debtor.search(params[:search])
+    sort_order = (sort_column + " " + sort_direction)
+    @debtor = Debtor.search(params[:search], sort_order)
   end
 
   private
+  
+  def sort_column
+    if Debtor.column_names.include?(params[:sort])
+      params[:sort]
+    else
+      "id"
+    end
+  end
+  
+  def sort_direction
+    if ["asc", "desc"].include?(params[:direction])
+      params[:direction]
+    else 
+      "asc" # default
+    end
+  end
 
   def assign_current_user
     @user = current_user
