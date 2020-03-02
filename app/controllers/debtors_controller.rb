@@ -75,13 +75,13 @@ class DebtorsController < ApplicationController
 
     sort_order = (sort_column + " " + sort_direction)
     @direction = sort_direction 
-    if params[:search].blank?
+    if params[:search].blank? && sort_column != 'total_balance'
       @pagy, @debtors = pagy(Debtor.all.includes(:debts).order(sort_order), items: 10)
-    elsif params[:sort] == 'total_balance'
-      @debtors = Debtor.joins(:debts)
+    elsif sort_column == 'total_balance'
+      @pagy, @debtors = pagy(Debtor.joins(:debts)
         .group('debts.pending_balance')
         .order(Arel.sql("SUM(debts.pending_balance) #{sort_direction}"))
-        .references(:debts)
+        .references(:debts), items: 10)
     else
       @debtors = Debtor.search(params[:search], sort_order)
     end
@@ -96,7 +96,7 @@ class DebtorsController < ApplicationController
   private
   
   def sort_column
-    if Debtor.column_names.include?(params[:sort])
+    if Debtor.column_names.push('total_balance').include?(params[:sort])
       params[:sort]
     else
       "id"
