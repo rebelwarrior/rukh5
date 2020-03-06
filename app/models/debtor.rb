@@ -71,7 +71,6 @@ class Debtor < ApplicationRecord
     end
   end
 
-  # TODO: Move below to Helper Methods
   ## Helper Methods
   def self.remove_hyphens(term)
     term.to_s.each_char.select { |x| x.match(/[0-9]/) }.join('')

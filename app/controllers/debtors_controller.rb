@@ -76,7 +76,7 @@ class DebtorsController < ApplicationController
     sort_order = (sort_column + " " + sort_direction)
     @direction = sort_direction 
     if params[:search].blank? && sort_column != 'total_balance'
-      @pagy, @debtors = pagy(Debtor.all.includes(:debts).order(sort_order), items: 10)
+      @pagy, @debtors = pagy(Debtor.all.order(sort_order), items: 10)
     elsif sort_column == 'total_balance'
       @pagy, @debtors = pagy(Debtor.joins(:debts)
         .group('debts.pending_balance')
