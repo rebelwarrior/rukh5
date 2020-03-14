@@ -1,6 +1,9 @@
 %footer.footer
   %nav.lower-nav
     %ul
+      %li
+        = link_to "🇺🇸", params.permit!.merge({locale: :en})
+        = link_to "🇵🇷", params.permit!.merge({locale: :es})
       - unless current_user.nil?
         %li
           = "<i class='fa fa-user'></i>".html_safe + " #{current_user.email}" 
