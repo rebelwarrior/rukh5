@@ -1,7 +1,7 @@
 # Module with methods to support the Import Action
 module ImportSupport
-  extend self 
-  
+  module_function
+
   def import_key_array(model, extra = [])
     model.attribute_names - %w[created_at updated_at] + extra
   end

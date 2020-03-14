@@ -7,26 +7,26 @@ class DebtsController < ApplicationController
   ## Resource Actions ##
   def new
     assign_current_user
-    @debtor = Debtor.find_by_id(params[:debtor_id])
+    @debtor = Debtor.find_by(id: params[:debtor_id])
     @debt = Debt.new
   end
 
   def edit
     assign_current_user
-    @debt = Debt.find_by_id(params[:id])
-    @debtor = Debtor.find_by_id(@debt.debtor_id)
+    @debt = Debt.find_by(id: params[:id])
+    @debtor = Debtor.find_by(id: @debt.debtor_id)
   end
 
   def show
     assign_current_user
-    @debt = Debt.find_by_id(params[:id])
-    @debtor = Debtor.find_by_id @debt.debtor_id
+    @debt = Debt.find_by(id: params[:id])
+    @debtor = Debtor.find_by id: @debt.debtor_id
   end
 
   # rubocop:disable Metrics/AbcSize
   def create
     assign_current_user
-    @debtor = Debtor.find_by_id(params[:debtor_id])
+    @debtor = Debtor.find_by(id: params[:debtor_id])
     fail if @debtor.nil?
 
     params[:debt][:debtor_id] = @debtor.id
@@ -45,10 +45,10 @@ class DebtsController < ApplicationController
 
   def update
     assign_current_user
-    @debt = Debt.find_by_id(params[:id])
-    @debtor = Debtor.find_by_id(@debt.debtor_id)
+    @debt = Debt.find_by(id: params[:id])
+    @debtor = Debtor.find_by(id: @debt.debtor_id)
     @debt.infraction_number = strip_hyphens(@debt.infraction_number)
-    if @debt.update_attributes(update_debt_params) && @debt.valid?
+    if @debt.update(update_debt_params) && @debt.valid?
       flash[:success] = I18n.t('flash.debt_updated')
       redirect_to @debt
     else

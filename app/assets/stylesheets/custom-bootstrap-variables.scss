@@ -5,3 +5,17 @@ $custom-file-text: (
   en: "Browse",
   es: "Elegir"
 );
+.custom-file:hover {
+
+    color: #fff;
+    background-color: #5a6268;
+    border-color: #545b62;
+
+};
+// Can't get the hover over the label to work
+label.custom-file-label:hover {
+    
+    color: #fff;
+    background-color: #5a6268;
+
+};

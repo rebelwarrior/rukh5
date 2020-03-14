@@ -36,7 +36,7 @@ class Debtor < ApplicationRecord
                                             message: I18n.t('validation_error.must_be_valid_ss') }
 
   ## Methods
-  def self.search(search_term, sort_order="debtor.id desc")
+  def self.search(search_term, sort_order = "debtor.id desc")
     search_term = clean_up_search_term(search_term)
     term_class = search_term.class
 
@@ -46,7 +46,7 @@ class Debtor < ApplicationRecord
       where('ss_hex_digest LIKE ?', "%#{search_term}%").order(sort_order)
     elsif term_class == String
       where('LOWER(name) LIKE ? OR employer_id_number LIKE ? OR email LIKE ?',
-            "%#{search_term}%", "%#{search_term}%", 
+            "%#{search_term}%", "%#{search_term}%",
             "%#{search_term}%").order(sort_order)
     else
       fail I18n.t('flash.debtor_search_failed')

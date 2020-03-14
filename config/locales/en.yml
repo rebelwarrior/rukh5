@@ -112,6 +112,7 @@ en:
     no_results: "There are no results for:"
     resutls_for: "Results for:"
     search: "Search"
+    create_record_btn: "Create Record"
   debts_views:
     index_title: "Invoices"
     index_sub_title: "Invoices:"

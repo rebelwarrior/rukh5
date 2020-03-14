@@ -69,7 +69,7 @@ class ProcessCSV
             StoreRecord.new.perform(sanitized_row)
             # appends in latest record to allow error to report where import failed
             counter << sanitized_row
-            puts "\033[32m#Processed Record No. #{counter.size}.\033[0m\n"
+            Rails.logger.info "\033[32m#Processed Record No. #{counter.size}.\033[0m\n"
           end
         end
       end

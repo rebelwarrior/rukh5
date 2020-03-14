@@ -31,7 +31,7 @@ class Debt < ApplicationRecord
   # TODO refactor:
   def find_debtor_attr(debtor_id, attributes)
     result = []
-    debtor = Debtor.find_by_id(debtor_id)
+    debtor = Debtor.find_by(id: debtor_id)
     attributes.each do |attribute|
       attribute_clean = { name: :name, contact: :contact_person }.fetch(attribute)
       result << (debtor.nil? ? 'NULL' : debtor.public_send(attribute_clean))
@@ -52,7 +52,7 @@ class Debt < ApplicationRecord
     require 'csv'
     CSV.generate(options) do |csv|
       csv.add_row(column_names + extra_column_names)
-      all.each do |record|
+      all.find_each do |record|
         extra_items = []
         yield(extra_items, record) if block
         csv.add_row record.attributes.values_at(*column_names).concat(extra_items).flatten

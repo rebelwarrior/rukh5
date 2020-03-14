@@ -28,7 +28,7 @@ class DebtorsController < ApplicationController
 
   def show
     assign_current_user
-    @debtor = Debtor.find_by_id(params[:id])
+    @debtor = Debtor.find_by(id: params[:id])
   end
 
   def destroy
@@ -46,23 +46,23 @@ class DebtorsController < ApplicationController
 
   def edit
     assign_current_user
-    @debtor = Debtor.find_by_id(params[:id])
+    @debtor = Debtor.find_by(id: params[:id])
   end
 
   def update
     # TODO: fix form method to patch or put for SS
     # Probably related to debtor_params below
     assign_current_user
-    @debtor = Debtor.find_by_id(params[:id])
+    @debtor = Debtor.find_by(id: params[:id])
     begin
-      if @debtor.update_attributes(debtor_params)
+      if @debtor.update(debtor_params)
         flash[:success] = I18n.t('flash.debtor_info_updated')
         redirect_to @debtor
       else
         render 'edit'
       end
-    rescue ActiveRecord::RecordNotUnique, 
-           ActiveRecord::StatementInvalid, 
+    rescue ActiveRecord::RecordNotUnique,
+           ActiveRecord::StatementInvalid,
            ActiveRecord::JDBCError => e
       flash.now[:error] = "#{I18n.t('flash.error_on_record_creation')} \t#{e.message}"
       render 'new'
@@ -74,7 +74,7 @@ class DebtorsController < ApplicationController
     assign_current_user
 
     sort_order = (sort_column + " " + sort_direction)
-    @direction = sort_direction 
+    @direction = sort_direction
     if params[:search].blank? && sort_column != 'total_balance'
       @pagy, @debtors = pagy(Debtor.all.order(sort_order), items: 10)
     elsif sort_column == 'total_balance'
@@ -94,7 +94,7 @@ class DebtorsController < ApplicationController
   end
 
   private
-  
+
   def sort_column
     if Debtor.column_names.push('total_balance').include?(params[:sort])
       params[:sort]
@@ -102,11 +102,11 @@ class DebtorsController < ApplicationController
       "id"
     end
   end
-  
+
   def sort_direction
-    if ["asc", "desc"].include?(params[:direction])
+    if %w[asc desc].include?(params[:direction])
       params[:direction]
-    else 
+    else
       "asc" # default
     end
   end

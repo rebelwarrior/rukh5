@@ -2,8 +2,8 @@
   %nav.lower-nav
     %ul
       %li
-        = link_to "🇺🇸", params.permit!.merge({locale: :en})
-        = link_to "🇵🇷", params.permit!.merge({locale: :es})
+        = link_to "🇺🇸", toggle_lang_param(:en)
+        = link_to "🇵🇷", toggle_lang_param(:es)
       - unless current_user.nil?
         %li
           = "<i class='fa fa-user'></i>".html_safe + " #{current_user.email}" 

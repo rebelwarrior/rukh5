@@ -13,7 +13,7 @@ class ImportController < ApplicationController
     file = params[:file]
     if file.blank?
       flash[:error] = t('import_page.not_csv')
-      redirect_to action: 'new', status: 303
+      redirect_to action: 'new', status: :see_other
     elsif file.headers['Content-Type: text/csv'] ||
           file.headers['Content-Type: application/vnd.ms-excel']
       result = import(file) ## Calls import function below
@@ -25,7 +25,7 @@ class ImportController < ApplicationController
     else
       flash[:error] = t('import_page.not_csv')
       flash[:notice] = file.headers
-      redirect_to action: 'new', status: 303
+      redirect_to action: 'new', status: :see_other
     end
   end
   # rubocop:enable Metrics/AbcSize
@@ -33,14 +33,14 @@ class ImportController < ApplicationController
   private
 
   def import(file)
-    before = Time.now
+    before = Time.zone.now
     begin
       total_lines = ImportLogic.import_csv(file)
     rescue ImportSupport::ImportError => error_message
       flash[:error] = "#{t('import_page.import_failed')}: #{error_message}"
       return { error: error_message }
     end
-    after = Time.now
+    after = Time.zone.now
     { toal_time: after - before, total_lines: total_lines, error: nil }
   end
 

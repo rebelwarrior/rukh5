@@ -40,7 +40,8 @@ end
 
 module DebtorsBackendHelper
   include Utilities
-  extend self
+
+  module_function
 
   def remove_hyphens_from_numbers(term)
     Utilities.remove_hyphens(term)
