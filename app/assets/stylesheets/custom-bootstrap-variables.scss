@@ -19,3 +19,6 @@ label.custom-file-label:hover {
     background-color: #5a6268;
 
 };
+.custom-file-label::after:hover {
+  background-color: aqua;
+};
