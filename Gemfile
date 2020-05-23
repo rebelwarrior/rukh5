@@ -48,11 +48,11 @@ gem 'hamlit'
 gem 'jquery-rails'
 gem 'popper_js'
 # gem 'bootstrap', '~> 4.1.2' 
-gem 'bootstrap', '>= 4.3.1' #depends on auto-prefixer which requires node
+#gem 'bootstrap', '>= 4.3.1' #depends on auto-prefixer which requires node
 # This change affects warble war making #TODO fix war
 
 # Pagination
-gem 'pagy', '~> 2.1.1'
+gem 'pagy', '~> 3.5' 
 
 # Markdown
 gem 'kramdown'
@@ -101,3 +101,5 @@ gem 'sprockets', '>= 3.7.2', '< 4.0.0' #'>= 4.0.0.beta8'
 
 ## Internationalization Bug with 1.3.0 & JRuby - locking to 1.2
 gem 'i18n'#, '~> 1.2.0'
+
+gem "cable_ready", "~> 4.1"

@@ -8,13 +8,12 @@
 Warbler::Config.new do |config|
   # config.gem_path = "WEB-INF/gems" #trying to fix tomcat not finding gems
   
-  
   # config.jar_name = "rukh5#{Time.now.to_i}"
   # config.jar_name = "rukh"
   ## The double ## does versioning in Tomcat but kills the war in windows
   config.excludes = FileList["**/*/*.box"]
   config.includes = FileList["Rakefile"]
-  config.webserver = 'jenkins-ci.winstone' #Winstone is default this is an imp ver
+  # config.webserver = 'jenkins-ci.winstone' #Winstone is default this is an imp ver
   ## Below are already included in web.xml
   # config.webxml.rails.env = 'production'
   # config.webxml.customkey = { display_name: "NAMeIsAwesome!" }
@@ -60,7 +59,7 @@ Warbler::Config.new do |config|
 
   # An array of Bundler groups to avoid including in the war file.
   # Defaults to ["development", "test", "assets"].
-  config.bundle_without = []
+  config.bundle_without = ["test"]
 
   # Other gems to be included. If you don't use Bundler or a gemspec
   # file, you need to tell Warbler which gems your application needs
@@ -69,6 +68,7 @@ Warbler::Config.new do |config|
   # unless the vendor/rails directory is present.
   # config.gems += ["activerecord-jdbcmysql-adapter", "jruby-openssl"]
   # config.gems << "tzinfo"
+  config.gems << "sassc"
 
   # Uncomment this if you don't want to package rails gem.
   # config.gems -= ["rails"]
@@ -84,7 +84,7 @@ Warbler::Config.new do |config|
 
   # Include gem dependencies not mentioned specifically. Default is
   # true, uncomment to turn off.
-  # config.gem_dependencies = false
+  config.gem_dependencies = true
 
   # Array of regular expressions matching relative paths in gems to be
   # excluded from the war. Defaults to empty, but you can set it like
@@ -109,7 +109,7 @@ Warbler::Config.new do |config|
 
   # When set to true, Warbler will override the value of ENV['GEM_HOME'] even it
   # has already been set.
-  # config.override_gem_home = false
+  config.override_gem_home = false
 
   # === War files only below here ===
 

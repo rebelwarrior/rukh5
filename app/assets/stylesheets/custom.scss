@@ -246,3 +246,19 @@ footer {
       -webkit-border-radius: 5px 5px 5px 5px; 
       border-radius: 5px 5px 5px 5px;
 }
+pre {
+  background-color: #eee;
+}
+
+#progress-bar {
+  background-color: #ccc;
+  border-radius: 13px;
+  padding: 3px;
+}
+
+#progress-bar>div {
+  background-color: green;
+  width: 0;
+  height: 20px;
+  border-radius: 10px;
+}

@@ -1,0 +1,69 @@
+= cmess - Assist with handling messed up encodings
+
+== VERSION
+
+This documentation refers to cmess version 0.5.1
+
+
+== DESCRIPTION
+
+CMess bundles several tools under its hood that aim at dealing with various
+problems occurring in the context of character sets and encodings. Currently,
+there are:
+
++guess_encoding+::  Simple helper to identify the encoding of a given string.
+                    Includes the ability to automatically detect the encoding
+                    of an input. (see CMess::GuessEncoding)
++cinderella+::      When characters are "double encoded", you can't easily
+                    convert them back -- this is where cinderella comes in,
+                    sorting the good ones into the pot and the (potentially)
+                    bad ones into the crop... (see CMess::Cinderella)
++bconv+::           Convert between bibliographic (and other) encodings.
+                    (see CMess::BConv)
++decode_entities+:: Decode HTML entities in a string. (see CMess::DecodeEntities)
+
+
+== SUPPORTED PLATFORMS
+
+Requires Ruby version 1.9.3 or higher; use the latest 0.3.x release on older
+Ruby versions. CMess has been tested with ruby 2.1.3p242 on x86_64-linux.
+
+
+== LINKS
+
+Documentation:: https://blackwinter.github.com/cmess
+Source code::   https://github.com/blackwinter/cmess
+RubyGem::       https://rubygems.org/gems/cmess
+
+
+== AUTHORS
+
+* Jens Wille <mailto:jens.wille@gmail.com>
+
+
+== CREDITS
+
+* John Vorhauer <mailto:john@vorhauer.de> for the idea and
+  original implementation of the automatic encoding guesser
+  (see CMess::GuessEncoding::Automatic).
+
+
+== LICENSE AND COPYRIGHT
+
+Copyright (C) 2007-2012 University of Cologne,
+Albertus-Magnus-Platz, 50923 Cologne, Germany
+
+Copyright (C) 2013-2016 Jens Wille
+
+cmess is free software: you can redistribute it and/or modify it under the
+terms of the GNU Affero General Public License as published by the Free
+Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+cmess is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for
+more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with cmess. If not, see <http://www.gnu.org/licenses/>.

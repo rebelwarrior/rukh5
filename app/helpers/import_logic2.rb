@@ -5,6 +5,7 @@ require 'import_support'
 require 'import_logic3'
 
 # Contains the logic for importing CSV files to the db.
+## What does this method return??
 class ImportLogic
   def self.import_csv(file)
     file_lines = FindFileLines.new.perform(file)

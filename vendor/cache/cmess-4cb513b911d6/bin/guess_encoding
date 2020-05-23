@@ -1,0 +1,203 @@
+#! /usr/bin/env ruby
+
+#--
+###############################################################################
+#                                                                             #
+# guess_encoding -- Assist with guessing the encoding of some input at hand   #
+#   [A component of cmess, the encoding tool-box]                             #
+#                                                                             #
+# Copyright (C) 2008-2012 University of Cologne,                              #
+#                         Albertus-Magnus-Platz,                              #
+#                         50923 Cologne, Germany                              #
+#                                                                             #
+# Copyright (C) 2013-2014 Jens Wille                                          #
+#                                                                             #
+# Authors:                                                                    #
+#     Jens Wille <jens.wille@gmail.com>                                       #
+#                                                                             #
+# cmess is free software; you can redistribute it and/or modify it under the  #
+# terms of the GNU Affero General Public License as published by the Free     #
+# Software Foundation; either version 3 of the License, or (at your option)   #
+# any later version.                                                          #
+#                                                                             #
+# cmess is distributed in the hope that it will be useful, but WITHOUT ANY    #
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS   #
+# FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for     #
+# more details.                                                               #
+#                                                                             #
+# You should have received a copy of the GNU Affero General Public License    #
+# along with cmess. If not, see <http://www.gnu.org/licenses/>.               #
+#                                                                             #
+###############################################################################
+#++
+
+require 'cmess/guess_encoding'
+require 'cmess/cli'
+
+include CMess::CLI
+
+options = {
+  input:                STDIN,
+  line:                 1,
+  encodings:            nil,
+  additional_encodings: [],
+  target_encoding:      determine_system_encoding,
+  manual:               false,
+  reverse:              false,
+  chunk_size:           nil,
+  ignore_bom:           false,
+  charcodes:            nil,
+  base:                 16
+}
+
+parse_options { |opts|
+  opts.banner = "Usage: #{$0} [options] [FILE...]"
+
+  opts.separator ''
+  opts.separator 'Options:'
+
+  opts.on('-i', '--input FILE', 'Input file to read from [Default: STDIN]') { |input|
+    options[:input] = open_file_or_std(input)
+    options[:input_set] = true
+  }
+
+  opts.separator ''
+  opts.separator '  * Automatic guessing'
+
+  opts.on('-c', '--chunk-size SIZE', Integer, 'Size of chunks input will be read in until a valid encoding', 'has been found; by default the whole file will be read') { |size|
+    options[:chunk_size] = size
+  }
+
+  opts.separator ''
+
+  opts.on('-b', '--ignore-bom', 'Ignore detected BOM (if any); see below for a list of', 'supported encodings') {
+    options[:ignore_bom] = true
+  }
+
+  opts.separator ''
+  opts.separator '  * Manual guessing'
+
+  opts.on('-m', '--manual', 'Present variously encoded input for manual encoding guessing') {
+    options[:manual] = true
+  }
+
+  opts.separator ''
+
+  opts.on('-l', '--line LINE', Integer, "Line number of input file to use for testing [Default: #{options[:line]}]") { |line|
+    abort 'Line number must be greater than 0!' unless line > 0
+    options[:line] = line
+  }
+
+  opts.separator ''
+
+  opts.on('-e', '--encodings ENCODINGS...', 'List of encodings to try >instead of< default (see below)') { |encodings|
+    options[:encodings] ||= []
+    options[:encodings] += arg_list(encodings)
+  }
+
+  opts.on('-a', '--additional-encodings ENCODINGS...', 'List of encodings to try >in addition to< default (see below)') { |encodings|
+    options[:additional_encodings] += arg_list(encodings)
+  }
+
+  opts.separator ''
+
+  opts.on('-t', '--target-encoding ENCODING', "Target encoding of your system [Default: #{options[:target_encoding]}]") { |encoding|
+    options[:target_encoding] = encoding
+  }
+
+  opts.separator ''
+
+  opts.on('-L', '--list-encodings', 'Print a list of all available encodings on your system and exit') {
+    puts CMess::GuessEncoding::Encoding.all_encodings
+    exit
+  }
+
+  opts.separator ''
+
+  opts.on('-R', '--reverse', 'Reverse encoding direction (FROM target TO encodings)') {
+    options[:reverse] = true
+  }
+
+  opts.separator ''
+  opts.separator '  * Charcodes'
+
+  opts.on('-C', '--charcodes CHARCODES', 'Specify a list of character codes (in hexadecimal by default)', "for manual guessing. (Options '-e', '-a', and '-t' apply here", 'as well; see "Manual guessing" for details.)') { |charcodes|
+    options[:charcodes] = arg_list(charcodes)
+  }
+
+  opts.separator ''
+
+  opts.on('-D', '--decimal', 'Charcodes are in decimal') {
+    options[:base] = 10
+  }
+
+  opts.on('-O', '--octal', 'Charcodes are in octal') {
+    options[:base] = 8
+  }
+
+  opts.separator ''
+  opts.separator 'Generic options:'
+
+  opts.on('-h', '--help', 'Print this help message and exit') {
+    puts opts
+    exit
+  }
+
+  opts.on('--version', 'Print program version and exit') {
+    puts "#{File.basename($0)} v#{CMess::GuessEncoding::VERSION} (part of cmess v#{CMess::VERSION})"
+    exit
+  }
+
+  opts.separator ''
+  opts.separator 'Supported encodings for automatic guessing (will be tried in that order):'
+  CMess::GuessEncoding::Automatic.supported_encodings.join(', ').word_wrap(110, true).each { |list|
+    opts.separator list
+  }
+
+  opts.separator ''
+  opts.separator 'Supported encodings for BOM detection (will be tried in that order):'
+  CMess::GuessEncoding::Automatic.supported_boms.join(', ').word_wrap(110, true).each { |list|
+    opts.separator list
+  }
+
+  opts.separator ''
+  opts.separator 'Default encodings for manual guessing:'
+  CMess::GuessEncoding::Manual::ENCODINGS.join(', ').word_wrap(110, true).each { |list|
+    opts.separator list
+  }
+
+  opts.separator ''
+  opts.separator 'Likely candidates for additional testing:'
+  CMess::GuessEncoding::Manual::CANDIDATES.join(', ').word_wrap(110, true).each { |list|
+    opts.separator list
+  }
+
+  opts.separator ''
+  opts.separator "NOTE: To select all encodings available on your system (see '-L'), specify __ALL__."
+  opts.separator '      To select the likely candidates named above, specify __COMMON__.'
+
+  opts.separator ''
+  opts.separator 'When FILE is -, STDIN is used.'
+}
+
+cli do
+  trailing_args_as_input(options)
+
+  if options[:manual] || options[:charcodes]
+    options[:target_encoding].call if options[:target_encoding].respond_to?(:call)
+
+    if charcodes = options[:charcodes]
+      input = charcodes.map { |charcode| charcode.to_i(options[:base]).chr }.join
+    else
+      $. = 0 # reset line counter
+      input = options[:input].each { |line| break line if $. == options[:line] }
+
+      abort "Input was empty!" if $..zero?
+      abort "Line not found -- input has only #{$.} line#{'s' if $. != 1}" unless input.is_a?(String)
+    end
+
+    CMess::GuessEncoding.manual(options.merge(input: input))
+  else
+    puts CMess::GuessEncoding.automatic(options[:input], options[:chunk_size], options[:ignore_bom])
+  end
+end

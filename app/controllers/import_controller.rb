@@ -8,15 +8,12 @@ class ImportController < ApplicationController
     @import_title = t('import_page.title')
   end
 
-  # rubocop:disable Metrics/AbcSize
   def create
     file = params[:file]
-    if file.blank?
-      flash[:error] = t('import_page.not_csv')
-      redirect_to action: 'new', status: :see_other
-    elsif file.headers['Content-Type: text/csv'] ||
-          file.headers['Content-Type: application/vnd.ms-excel']
-      result = import(file) ## Calls import function below
+    if !file.blank? && (file.headers['Content-Type: text/csv'] ||
+          file.headers['Content-Type: application/vnd.ms-excel'])
+      ## Calls import function below
+      result = import(file) 
       unless result[:error]
         flash[:notice] = import_notice(result)
         flash[:notice] = t('import_page.imported')
@@ -24,14 +21,14 @@ class ImportController < ApplicationController
       redirect_to action: 'new'
     else
       flash[:error] = t('import_page.not_csv')
-      flash[:notice] = file.headers
+      flash[:notice] = file.headers unless file.blank?
       redirect_to action: 'new', status: :see_other
     end
   end
-  # rubocop:enable Metrics/AbcSize
 
   private
 
+  # Imports File,  Here is the Import Call
   def import(file)
     before = Time.zone.now
     begin

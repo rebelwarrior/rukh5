@@ -1,0 +1,117 @@
+#! /usr/bin/env ruby
+
+#--
+###############################################################################
+#                                                                             #
+# bconv -- Convert between bibliographic (and other) encodings                #
+#   [A component of cmess, the encoding tool-box]                             #
+#                                                                             #
+# Copyright (C) 2008-2012 University of Cologne,                              #
+#                         Albertus-Magnus-Platz,                              #
+#                         50923 Cologne, Germany                              #
+#                                                                             #
+# Copyright (C) 2013-2014 Jens Wille                                          #
+#                                                                             #
+# Authors:                                                                    #
+#     Jens Wille <jens.wille@gmail.com>                                       #
+#                                                                             #
+# cmess is free software; you can redistribute it and/or modify it under the  #
+# terms of the GNU Affero General Public License as published by the Free     #
+# Software Foundation; either version 3 of the License, or (at your option)   #
+# any later version.                                                          #
+#                                                                             #
+# cmess is distributed in the hope that it will be useful, but WITHOUT ANY    #
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS   #
+# FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for     #
+# more details.                                                               #
+#                                                                             #
+# You should have received a copy of the GNU Affero General Public License    #
+# along with cmess. If not, see <http://www.gnu.org/licenses/>.               #
+#                                                                             #
+###############################################################################
+#++
+
+require 'cmess/bconv'
+require 'cmess/cli'
+
+include CMess::CLI
+
+options = {
+  input:           STDIN,
+  output:          STDOUT,
+  source_encoding: determine_system_encoding,
+  target_encoding: determine_system_encoding,
+  chartab_file:    CMess::BConv::DEFAULT_CHARTAB_FILE
+}
+
+parse_options { |opts|
+  opts.banner = "Usage: #{$0} [options] [FILE...]"
+
+  opts.separator ''
+  opts.separator 'Options:'
+
+  opts.on('-i', '--input FILE', 'Input file to read from [Default: STDIN]') { |input|
+    options[:input] = open_file_or_std(input)
+    options[:input_set] = true
+  }
+
+  opts.on('-o', '--output FILE', 'Output file to write to [Default: STDOUT]') { |output|
+    options[:output] = open_file_or_std(output, 'w')
+  }
+
+  opts.on('-I', '--in-place FILE', "Modify file in-place; sets '-i' and '-o'") { |file|
+    options[:input], options[:output] = open_file_in_place(file)
+    options[:input_set] = true
+  }
+
+  opts.separator ''
+
+  opts.on('-e', '--source-encoding ENCODING', "Encoding of input file [Default: #{options[:source_encoding]}]") { |encoding|
+    options[:source_encoding] = encoding.downcase
+  }
+
+  opts.on('-t', '--target-encoding ENCODING', "Desired encoding for output file [Default: #{options[:target_encoding]}]") { |encoding|
+    options[:target_encoding] = encoding.downcase
+  }
+
+  opts.separator ''
+
+  opts.on('-c', '--chartab YAML_FILE', 'File containing character mappings, in YAML format.', "[Default: #{options[:chartab_file]}]") { |chartab|
+    options[:chartab_file] = chartab
+  }
+
+  opts.on('-l', '--list-encodings', 'Print a list of all available bibliographic encodings', "and exit; depends on <chartab>, see '-c'") {
+    options[:list_encodings] = true
+  }
+
+  opts.separator ''
+  opts.separator 'Generic options:'
+
+  opts.on('-h', '--help', 'Print this help message and exit') {
+    puts opts
+    exit
+  }
+
+  opts.on('--version', 'Print program version and exit') {
+    puts "#{File.basename($0)} v#{CMess::BConv::VERSION} (part of cmess v#{CMess::VERSION})"
+    exit
+  }
+
+  opts.separator ''
+  opts.separator 'When FILE is -, either STDIN or STDOUT is used (as appropriate).'
+}
+
+cli do
+  if options[:list_encodings]
+    puts CMess::BConv.encodings(options[:chartab_file])
+    exit
+  end
+
+  [:source_encoding, :target_encoding].each { |key|
+    options[key].call if options[key].respond_to?(:call)
+  }
+
+  trailing_args_as_input(options)
+
+  CMess::BConv.convert(options)
+end

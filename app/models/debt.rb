@@ -39,8 +39,7 @@ class Debt < ApplicationRecord
     result
   end
 
-  ## Export to CSV
-  ## Calls to_plan_csv w/ extra column names
+  ## Export to CSV -- Calls to_plan_csv w/ extra column names
   def self.to_csv
     to_plain_csv(%i[debtor_name]) do |extra_items, record|
       extra_items.push(record.find_debtor_attr(record.attributes['debtor_id'], %i[name]))

@@ -75,8 +75,10 @@ namespace :tomcat do
     version = idenfity_version
 
     ## Below step may not be nescessary.
-    create "/usr/local/Cellar/tomcat/#{version}/libexec/bin/setenv.sh",
-           'CATALINA_OPTS="-XX:MaxPermSize=256M -XX:PermSize=256M -Xmx1024m"'
+    
+    # Not Supported above Java 8
+    # create "/usr/local/Cellar/tomcat/#{version}/libexec/bin/setenv.sh",
+    #        'CATALINA_OPTS="-XX:MaxPermSize=256M -XX:PermSize=256M -Xmx1024m"'
 
     edit "/usr/local/Cellar/tomcat/#{version}/libexec/conf/tomcat-users.xml",
          tomcat_default_options, tomcat_new_options

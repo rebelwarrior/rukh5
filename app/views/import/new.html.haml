@@ -17,3 +17,10 @@
           .col-xs-6{style: 'margin-top: 15px'}
             = submit_tag t('import_page.import'), class: 'btn btn-secondary'
 %hr
+
+:javascript
+  document.querySelector('.custom-file-input').addEventListener('change',function(e){
+    var fileName = document.getElementById("customFileLang").files[0].name;
+    var nextSibling = e.target.nextElementSibling
+    nextSibling.innerText = fileName
+  })

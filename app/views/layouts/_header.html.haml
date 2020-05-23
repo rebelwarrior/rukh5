@@ -16,7 +16,7 @@
           %a{:href => '#', :class => 'dropdown-toggle nav-link', :'data-toggle' => 'dropdown' }
             = t('header.user')
             %b.caret
-          %ul.dropdown-menu.bg-dark
+          %ul.dropdown-menu.bg-dark.dropdown-menu-right{:'aria-labelledby' => "dropdownMenuLink" }
             %li.nav-item.divider
             %li.nav-item
               = link_to t('header.update_info'), edit_user_registration_path(current_user), class: 'nav-link'
