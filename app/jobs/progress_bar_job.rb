@@ -13,5 +13,6 @@ class ProgressBarJob < ApplicationJob
       )
       cable_ready.broadcast
       sleep 1 # fake some latency
+    end
   end
 end

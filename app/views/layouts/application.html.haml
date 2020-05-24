@@ -16,7 +16,7 @@
     = javascript_include_tag("https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js", integrity: "sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6", crossorigin: "anonymous")
     = javascript_include_tag("application", "data-turbolinks-track": "reload")
     = favicon_link_tag('favicon.png', type: 'image/png')
-    = favicon_link_tag('apple-touch-icon-72x72-precomposed.png', rel: "apple-touch-icon-precomposed", size: '72x72', type: 'image/png')
+    - #favicon_link_tag('apple-touch-icon-72x72-precomposed.png', rel: "apple-touch-icon-precomposed", size: '72x72', type: 'image/png')
   %body
     = render("layouts/header")
     .container
