@@ -67,4 +67,5 @@ config/database.yml
 # Ignore CircleCI for now
 /.circleci
 
-vendor/cache/
+# Gems in Vendor Cache
+vendor/cache/*.gem

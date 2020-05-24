@@ -48,7 +48,7 @@ gem 'hamlit'
 gem 'jquery-rails'
 gem 'popper_js'
 # gem 'bootstrap', '~> 4.1.2' 
-#gem 'bootstrap', '>= 4.3.1' #depends on auto-prefixer which requires node
+gem 'bootstrap', '>= 4.3.1' #depends on auto-prefixer which requires node
 # This change affects warble war making #TODO fix war
 
 # Pagination
