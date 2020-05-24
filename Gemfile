@@ -72,6 +72,9 @@ gem 'sucker_punch', require: false
 # For Roles and Authorization
 gem 'action_policy'
 
+# For Status Bar
+gem "cable_ready", "~> 4.1"
+
 group :development, :test do
   # RSpec (testing)
   gem 'rspec-rails', require: false 
@@ -102,4 +105,4 @@ gem 'sprockets', '>= 3.7.2', '< 4.0.0' #'>= 4.0.0.beta8'
 ## Internationalization Bug with 1.3.0 & JRuby - locking to 1.2
 gem 'i18n'#, '~> 1.2.0'
 
-gem "cable_ready", "~> 4.1"
+

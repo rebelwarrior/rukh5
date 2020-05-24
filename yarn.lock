@@ -6,3 +6,15 @@ bs-custom-file-input@^1.3.2:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/bs-custom-file-input/-/bs-custom-file-input-1.3.2.tgz#c141c94071cc5e9ac4ea98479a1c204dd18e3b9a"
   integrity sha512-lzgtGX2GDo7nUmsTCcTvYkCc35d3/E14h+HXmFKV8z2EJmtkMcvYT8BsWOjK67+ogZR3kc8OfH5O8APjvDUtFg==
+
+cable_ready@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/cable_ready/-/cable_ready-4.1.2.tgz#465eb1e5b851a5d1cec72726226c62c55261b616"
+  integrity sha512-F6hJBSsEjN2voJiUZoM05cplB49AIaXk3oHVZptPG2bbw+HLbiR3jU3SSslnm4VIKSfPzfvPHlyU16kuiro6JA==
+  dependencies:
+    morphdom "^2.5.12"
+
+morphdom@^2.5.12:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/morphdom/-/morphdom-2.6.1.tgz#e868e24f989fa3183004b159aed643e628b4306e"
+  integrity sha512-Y8YRbAEP3eKykroIBWrjcfMw7mmwJfjhqdpSvoqinu8Y702nAwikpXcNFDiIkyvfCLxLM9Wu95RZqo4a9jFBaA==

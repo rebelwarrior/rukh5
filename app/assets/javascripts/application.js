@@ -20,3 +20,10 @@
 //= require turbolinks
 //= require_tree .
 //= require bs-custom-file-input
+
+require("@rails/ujs").start()
+require("turbolinks").start()
+require("@rails/activestorage").start()
+require("channels")
+
+import "../stylesheets/application.css.scss" // <-- add this line
