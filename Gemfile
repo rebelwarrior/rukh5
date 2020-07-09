@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-jruby_jars_version = '9.2.11.1'
+jruby_jars_version = '9.2.12.0'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -15,6 +15,7 @@ gem 'activerecord-jdbcsqlite3-adapter'
 gem 'puma', '~> 4.2'
 # Use SCSS for stylesheets
 gem 'sassc-rails', require: false #'~> 5.0',
+gem 'sassc', '2.3.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 4.2.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes

@@ -5,14 +5,18 @@ AllCops:
   Exclude:
     - 'db/schema.rb'
 
-Metrics/LineLength:
+Layout/LineLength:
   # Enabled: false 
-  Max: 108
+  Max: 120
   Details: >-
-    Longer lines require scrolling when reviewing on Github.
+    Longer lines than 108 require scrolling when reviewing on Github. 
+    But setting to 120 for development.
 
 Style/AndOr:
   Enabled: false 
+  
+Style/RedundantSelf:
+  Enabled: false
   
 Style/SignalException: 
   EnforcedStyle: semantic
@@ -49,3 +53,47 @@ Metrics/AbcSize:
     
 Bundler/OrderedGems:
   Enabled: false
+  
+Style/ClassVars:
+  Enabled: false
+  Severity: warning
+  
+Style/FormatStringToken:
+  Enabled: false
+  Details: >-
+    Results in too many false positives when used with validations. 
+  
+## New cops:
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true 
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+  
+Lint/RaiseException:
+  Enabled: true 
+  
+Lint/StructNewOverride:
+  Enabled: true
+  
+Style/ExponentialNotation:
+  Enabled: true 
+  
+Style/HashEachMethods:
+  Enabled: true 
+  
+Style/HashTransformKeys:
+  Enabled: true 
+  Severity: warning
+  
+Style/HashTransformValues:
+  Enabled: true
+  Severity: warning
+  
+Style/SlicingWithRange:
+  Enabled: false
+  Details: >-
+    Too modern. I like the -1.
