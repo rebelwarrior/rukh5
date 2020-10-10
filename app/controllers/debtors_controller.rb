@@ -98,7 +98,7 @@ class DebtorsController < ApplicationController
   private
 
   def sort_column
-    if Debtor.column_names.push('total_balance').include?(params[:sort])
+    if Debtor.column_names.clone.push('total_balance').include?(params[:sort])
       params[:sort]
     else
       "id"

@@ -1,0 +1,2 @@
+module NoopsHelper
+end

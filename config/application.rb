@@ -41,6 +41,11 @@ module Rukh5
     # Set the default language to Spanish
     config.i18n.default_locale = :es
     
+    # Set haml as the default generator This DOES NOT WORK. 
+    # config.generators do |g|
+    #   g.template_engine :haml
+    # end
+    
     # Adding Yarn (JS NPM) packages to asset path
     config.assets.paths << Rails.root.join('node_modules')
     
