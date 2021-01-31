@@ -87,9 +87,11 @@ namespace :tomcat do
          tomcat_default_users, tomcat_new_users
 
     edit "/usr/local/Cellar/tomcat/#{version}/libexec/webapps/manager/WEB-INF/web.xml",
-         '<max-file-size>52428800</max-file-size>', '<max-file-size>104857600</max-file-size>'
+         '<max-file-size>52428800</max-file-size>', '<max-file-size>209715200</max-file-size>'
+    # edit "/usr/local/Cellar/tomcat/#{version}/libexec/webapps/manager/WEB-INF/web.xml",
+    #      '<max-request-size>104857600</max-request-size>', '<max-request-size>209715200</max-request-size>'
     edit "/usr/local/Cellar/tomcat/#{version}/libexec/webapps/manager/WEB-INF/web.xml",
-         '<max-request-size>52428800</max-request-size>', '<max-request-size>104857600</max-request-size>'
+         '<max-request-size>52428800</max-request-size>', '<max-request-size>209715200</max-request-size>'
   end
 
   desc 'Opens the relevant config files in mac or ubuntu.'
