@@ -10,6 +10,7 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2' 
 # Use jdbcsqlite3 as the database for Active Record
+gem "activerecord", ">= 5.2.4.5"
 gem 'activerecord-jdbcsqlite3-adapter'
 # Use Puma as the app server
 gem 'puma', '~> 4.2'
