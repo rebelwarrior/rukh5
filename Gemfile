@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-jruby_jars_version = '9.2.15.0'
+jruby_jars_version = '9.2.19.0'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -85,7 +85,7 @@ group :development, :test do
   gem 'capybara', require: false 
   # RuboCop for stylechecker
   gem 'rubocop', '>= 0.80.1', require: false
-  gem 'rubocop-rspec', require: false
+  # gem 'rubocop-rspec', require: false
   # Code smell checker 
   gem 'reek', require: false 
   gem 'bundler-leak', require: false

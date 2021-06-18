@@ -19,32 +19,26 @@ Gem::Specification.new do |s|
   s.post_install_message = "\ncmess-0.5.1 [2016-05-26]:\n\n* +cinderella+: Fixed YAML loading and option handling.\n* Fixed error message for missing required options.\n* Fixed YAML files for +cinderella+.\n\n".freeze
   s.rdoc_options = ["--title".freeze, "cmess Application documentation (v0.5.1)".freeze, "--charset".freeze, "UTF-8".freeze, "--line-numbers".freeze, "--all".freeze, "--main".freeze, "README".freeze]
   s.required_ruby_version = Gem::Requirement.new(">= 1.9.3".freeze)
-  s.rubygems_version = "3.0.6".freeze
+  s.rubygems_version = "3.1.6".freeze
   s.summary = "Assist with handling messed up encodings (Currently includes the following tools: bconv, cinderella, decode_entities, guess_encoding)".freeze
 
-  s.installed_by_version = "3.0.6" if s.respond_to? :installed_by_version
+  s.installed_by_version = "3.1.6" if s.respond_to? :installed_by_version
 
   if s.respond_to? :specification_version then
     s.specification_version = 4
+  end
 
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<htmlentities>.freeze, ["~> 4.3"])
-      s.add_runtime_dependency(%q<nuggets>.freeze, ["~> 1.5"])
-      s.add_runtime_dependency(%q<safe_yaml>.freeze, ["~> 1.0"])
-      s.add_development_dependency(%q<hen>.freeze, ["~> 0.8", ">= 0.8.5"])
-      s.add_development_dependency(%q<rake>.freeze, [">= 0"])
-    else
-      s.add_dependency(%q<htmlentities>.freeze, ["~> 4.3"])
-      s.add_dependency(%q<nuggets>.freeze, ["~> 1.5"])
-      s.add_dependency(%q<safe_yaml>.freeze, ["~> 1.0"])
-      s.add_dependency(%q<hen>.freeze, ["~> 0.8", ">= 0.8.5"])
-      s.add_dependency(%q<rake>.freeze, [">= 0"])
-    end
+  if s.respond_to? :add_runtime_dependency then
+    s.add_runtime_dependency(%q<htmlentities>.freeze, ["~> 4.3"])
+    s.add_runtime_dependency(%q<nuggets>.freeze, ["~> 1.5"])
+    s.add_runtime_dependency(%q<safe_yaml>.freeze, ["~> 1.0"])
+    s.add_development_dependency(%q<hen>.freeze, [">= 0.8.5", "~> 0.8"])
+    s.add_development_dependency(%q<rake>.freeze, [">= 0"])
   else
     s.add_dependency(%q<htmlentities>.freeze, ["~> 4.3"])
     s.add_dependency(%q<nuggets>.freeze, ["~> 1.5"])
     s.add_dependency(%q<safe_yaml>.freeze, ["~> 1.0"])
-    s.add_dependency(%q<hen>.freeze, ["~> 0.8", ">= 0.8.5"])
+    s.add_dependency(%q<hen>.freeze, [">= 0.8.5", "~> 0.8"])
     s.add_dependency(%q<rake>.freeze, [">= 0"])
   end
 end
